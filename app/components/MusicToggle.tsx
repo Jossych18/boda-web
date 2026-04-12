@@ -25,7 +25,7 @@ export default function MusicToggle() {
   return (
     <>
       <audio ref={audioRef} loop>
-        <source src="/musica.mp3" type="audio/mpeg" />
+        <source src="/musica.mp3?v=2" type="audio/mpeg" />
       </audio>
 
       <button
