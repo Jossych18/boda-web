@@ -17,7 +17,8 @@ const boda = {
   ciudad: "Madrid, España",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Complejo+La+Cig%C3%BCe%C3%B1a+Madrid",
-  galeriaUrl: "https://drive.google.com/drive/folders/1mM-gea6B3jjAFZ1Wt45cbf48LCBJG8Rf?usp=sharing",
+  galeriaUrl:
+    "https://drive.google.com/drive/folders/1mM-gea6B3jjAFZ1Wt45cbf48LCBJG8Rf?usp=sharing",
   contactoFormUrl: "https://formspree.io/f/xeepyyey",
 };
 
@@ -26,28 +27,28 @@ export default function HomePage() {
 
   if (!open) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#f5efe6] px-6 text-center text-[#3b2b20]">
-        <div className="w-full max-w-md rounded-[2rem] border border-[#d9cbb9] bg-white p-10 shadow-2xl transition-all duration-700 hover:scale-[1.02]">
-          <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f]">
+      <div className="flex min-h-screen items-center justify-center bg-[#f5efe6] px-4 py-10 text-center text-[#3b2b20] sm:px-6">
+        <div className="w-full max-w-md rounded-[2rem] border border-[#d9cbb9] bg-white p-8 shadow-2xl transition-all duration-700 hover:scale-[1.02] sm:p-10">
+          <p className="text-[11px] uppercase tracking-[0.3em] text-[#8b6b4f] sm:text-xs">
             Invitación
           </p>
 
-          <h1 className={`mt-6 text-5xl ${greatVibes.className}`}>
+          <h1 className={`mt-5 text-4xl sm:mt-6 sm:text-5xl ${greatVibes.className}`}>
             {boda.nombres}
           </h1>
 
-          <p className="mt-6 leading-8 text-[#5a4633]">
+          <p className="mt-5 text-sm leading-7 text-[#5a4633] sm:mt-6 sm:text-base sm:leading-8">
             Tenemos el placer de invitarte a compartir con nosotros uno de los
             días más importantes de nuestras vidas.
           </p>
 
-          <p className="mt-6 text-sm uppercase tracking-[0.2em] text-[#8b6b4f]">
+          <p className="mt-5 text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:mt-6 sm:text-sm">
             {boda.fecha}
           </p>
 
           <button
             onClick={() => setOpen(true)}
-            className="mt-8 rounded-full bg-[#3b2b20] px-8 py-3 text-white transition-all duration-500 hover:scale-110 hover:bg-[#5a4633]"
+            className="mt-7 rounded-full bg-[#3b2b20] px-8 py-3 text-sm text-white transition-all duration-500 hover:scale-105 hover:bg-[#5a4633] sm:mt-8"
           >
             Abrir invitación
           </button>
@@ -59,11 +60,11 @@ export default function HomePage() {
   return (
     <main className="animate-fadeIn bg-[#f5efe6] text-[#3b2b20]">
       <header className="sticky top-0 z-50 border-b border-[#d9cbb9] bg-[#f5efe6]/95 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 py-4 md:px-6 md:py-5">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 md:py-5">
           <div className="flex items-center justify-between gap-4">
             <a
               href="#bienvenidos"
-              className="text-3xl font-light tracking-wide md:text-4xl"
+              className="text-2xl font-light tracking-wide sm:text-3xl md:text-4xl"
             >
               A&amp;B
             </a>
@@ -90,12 +91,12 @@ export default function HomePage() {
           </div>
 
           <div className="mt-4 overflow-x-auto md:hidden">
-            <nav className="flex min-w-max gap-6 whitespace-nowrap text-xs uppercase tracking-[0.2em]">
+            <nav className="flex min-w-max gap-5 whitespace-nowrap text-[11px] uppercase tracking-[0.2em] text-[#5a4633]">
               <a href="#bienvenidos" className="transition hover:text-[#8b6b4f]">
                 ¡Bienvenidos!
               </a>
               <a href="#blog" className="transition hover:text-[#8b6b4f]">
-                Blog de boda
+                Blog
               </a>
               <a href="#rsvp" className="transition hover:text-[#8b6b4f]">
                 RSVP
@@ -113,25 +114,26 @@ export default function HomePage() {
 
       <section
         id="bienvenidos"
-        className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12 text-center md:px-6"
+        className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12 text-center sm:px-6 md:px-6"
       >
         <Image
           src="/novios.jpg"
           alt="Foto de los novios"
           fill
           priority
+          sizes="100vw"
           className="object-cover blur-[2px]"
         />
 
         <div className="absolute inset-0 bg-[#2a1d15]/50" />
 
-        <div className="relative z-10 w-full max-w-5xl rounded-[2.5rem] border border-white/20 bg-white/10 px-8 py-10 shadow-2xl backdrop-blur-md md:max-w-6xl md:px-16 md:py-14">
-          <p className="text-sm uppercase tracking-[0.35em] text-white/90 md:text-base">
+        <div className="relative z-10 w-full max-w-5xl rounded-[2rem] border border-white/20 bg-white/10 px-6 py-8 shadow-2xl backdrop-blur-md sm:px-8 sm:py-10 md:max-w-6xl md:rounded-[2.5rem] md:px-16 md:py-14">
+          <p className="text-xs uppercase tracking-[0.3em] text-white/90 sm:text-sm md:text-base md:tracking-[0.35em]">
             {boda.mensaje}
           </p>
 
           <h1
-            className={`mt-4 text-5xl text-white md:text-7xl ${greatVibes.className}`}
+            className={`mt-4 text-4xl text-white sm:text-5xl md:text-7xl ${greatVibes.className}`}
           >
             {boda.nombres}
           </h1>
@@ -140,18 +142,18 @@ export default function HomePage() {
             <Countdown />
           </div>
 
-          <p className="mt-5 text-base text-white md:text-xl">
+          <p className="mt-5 text-sm text-white sm:text-base md:text-xl">
             {boda.fecha} · {boda.hora}
           </p>
 
-          <p className="mt-2 text-sm text-[#e6d7c3] md:text-base">
+          <p className="mt-2 text-xs text-[#e6d7c3] sm:text-sm md:text-base">
             {boda.lugar} — {boda.ciudad}
           </p>
 
-          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
             <a
               href="/rsvp"
-              className="rounded-full border border-white px-8 py-3 text-white transition hover:scale-105 hover:bg-white hover:text-black"
+              className="rounded-full border border-white px-8 py-3 text-sm text-white transition hover:scale-105 hover:bg-white hover:text-black"
             >
               Confirmar asistencia
             </a>
@@ -160,7 +162,7 @@ export default function HomePage() {
               href={boda.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-white px-8 py-3 text-black transition hover:scale-105"
+              className="rounded-full bg-white px-8 py-3 text-sm text-black transition hover:scale-105"
             >
               Ver ubicación
             </a>
@@ -169,27 +171,29 @@ export default function HomePage() {
       </section>
 
       <FadeIn>
-        <section id="blog" className="px-6 py-20">
-          <div className="mx-auto max-w-6xl space-y-16">
-            <div className="grid items-center gap-10 rounded-[2rem] bg-[#f5efe6] p-8 shadow-xl md:grid-cols-2 md:p-10">
+        <section id="blog" className="px-4 py-14 sm:px-6 sm:py-16 md:py-20">
+          <div className="mx-auto max-w-6xl space-y-10 md:space-y-16">
+            <div className="grid items-center gap-8 rounded-[2rem] bg-[#f5efe6] p-6 shadow-xl sm:p-8 md:grid-cols-2 md:gap-10 md:p-10">
               <div className="overflow-hidden rounded-[1.5rem]">
                 <Image
                   src="/alianzas-doradas.jpg"
                   alt="alianzas"
                   width={900}
                   height={700}
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                 />
               </div>
 
               <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-[#8b6b4f]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f] sm:text-sm">
                   Blog de boda
                 </p>
 
-                <h2 className="mt-4 text-4xl font-light">Nuestra historia</h2>
+                <h2 className="mt-4 text-3xl font-light sm:text-4xl">
+                  Nuestra historia
+                </h2>
 
-                <div className="mt-8 space-y-6 leading-8 text-[#5a4633]">
+                <div className="mt-6 space-y-5 text-sm leading-7 text-[#5a4633] sm:mt-8 sm:text-base sm:leading-8">
                   <p>Hola a todos!!!</p>
 
                   <p>
@@ -215,26 +219,26 @@ export default function HomePage() {
             </div>
 
             <div className="grid overflow-hidden rounded-[2rem] shadow-xl md:grid-cols-2">
-              <div className="relative min-h-[320px] md:min-h-[560px]">
+              <div className="relative min-h-[280px] md:min-h-[560px]">
                 <Image
                   src="/flores-boho.jpg"
                   alt="decoración"
                   fill
-                  sizes="100vw"
-                  className="object-cover transition-transform duration-700 hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 hover:scale-105"
                 />
               </div>
 
-              <div className="bg-[#f5efe6] p-8 md:p-10">
-                <p className="text-sm uppercase tracking-[0.3em] text-[#8b6b4f]">
+              <div className="bg-[#f5efe6] p-6 sm:p-8 md:p-10">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f] sm:text-sm">
                   Invitación oficial
                 </p>
 
-                <h2 className="mt-4 text-4xl font-light">
+                <h2 className="mt-4 text-3xl font-light sm:text-4xl">
                   Queridos familiares y amigos
                 </h2>
 
-                <div className="mt-8 space-y-6 leading-8 text-[#5a4633]">
+                <div className="mt-6 space-y-5 text-sm leading-7 text-[#5a4633] sm:mt-8 sm:text-base sm:leading-8">
                   <p>
                     Nos hace muchísima ilusión invitaros a formar parte de uno
                     de los días más importantes de nuestras vidas. Queremos
@@ -269,7 +273,7 @@ export default function HomePage() {
                     mediante ingreso en el siguiente número de cuenta:
                   </p>
 
-                  <p className="text-lg font-medium tracking-wide text-[#3b2b20] md:text-xl">
+                  <p className="text-base font-medium tracking-wide text-[#3b2b20] sm:text-lg md:text-xl">
                     ES54 0073 0100 5905 9909 4910
                   </p>
 
@@ -280,7 +284,7 @@ export default function HomePage() {
 
                   <p>Con muchísimo cariño,</p>
 
-                  <p className="text-lg font-medium text-[#3b2b20] md:text-xl">
+                  <p className="text-base font-medium text-[#3b2b20] sm:text-lg md:text-xl">
                     Brigitte &amp; Alexander 💍
                   </p>
                 </div>
@@ -291,21 +295,21 @@ export default function HomePage() {
       </FadeIn>
 
       <FadeIn>
-        <section id="rsvp" className="px-6 pb-20 text-center">
-          <div className="mx-auto max-w-5xl rounded-[2rem] bg-[#3b2b20] p-10 text-white shadow-xl">
-            <p className="text-sm uppercase tracking-[0.3em] text-[#d6c2a8]">
+        <section id="rsvp" className="px-4 pb-14 text-center sm:px-6 sm:pb-16 md:pb-20">
+          <div className="mx-auto max-w-5xl rounded-[2rem] bg-[#3b2b20] p-8 text-white shadow-xl sm:p-10">
+            <p className="text-xs uppercase tracking-[0.3em] text-[#d6c2a8] sm:text-sm">
               Confirma tu asistencia
             </p>
 
-            <h2 className="mt-4 text-4xl font-light">RSVP</h2>
+            <h2 className="mt-4 text-3xl font-light sm:text-4xl">RSVP</h2>
 
-            <p className="mt-4 text-xl">
+            <p className="mt-4 text-base sm:text-xl">
               ¿Nos acompañas o te lo pierdes?
             </p>
 
             <a
               href="/rsvp"
-              className="mt-6 inline-block rounded-full bg-white px-6 py-3 text-[#3b2b20] transition hover:scale-105"
+              className="mt-6 inline-block rounded-full bg-white px-6 py-3 text-sm text-[#3b2b20] transition hover:scale-105"
             >
               Ir al formulario
             </a>
@@ -314,9 +318,9 @@ export default function HomePage() {
       </FadeIn>
 
       <FadeIn>
-        <section id="contacto" className="px-6 pb-20">
-          <div className="mx-auto max-w-5xl rounded-[2rem] bg-[#f5efe6] p-8 shadow-xl md:p-10">
-            <h2 className="mb-6 text-center text-4xl font-light">
+        <section id="contacto" className="px-4 pb-14 sm:px-6 sm:pb-16 md:pb-20">
+          <div className="mx-auto max-w-5xl rounded-[2rem] bg-[#f5efe6] p-6 shadow-xl sm:p-8 md:p-10">
+            <h2 className="mb-6 text-center text-3xl font-light sm:text-4xl">
               ¿Alguna duda?
             </h2>
 
@@ -326,9 +330,16 @@ export default function HomePage() {
       </FadeIn>
 
       <FadeIn>
-        <section id="galeria" className="px-6 pb-24 text-center">
-          <div className="mx-auto max-w-3xl rounded-[1.5rem] bg-[#f5efe6] p-8 shadow-lg">
-            <h2 className="text-3xl font-light">Comparte tus fotos</h2>
+        <section id="galeria" className="px-4 pb-20 text-center sm:px-6 sm:pb-24">
+          <div className="mx-auto max-w-3xl rounded-[1.5rem] bg-[#f5efe6] p-6 shadow-lg sm:p-8">
+            <h2 className="text-2xl font-light sm:text-3xl">
+              Comparte tus fotos
+            </h2>
+
+            <p className="mt-3 text-sm leading-7 text-[#5a4633] sm:text-base">
+              Escanea el código o entra directamente en la galería para subir y
+              ver recuerdos de este día tan especial.
+            </p>
 
             <Image
               src="/qr-galeria.png"
@@ -342,7 +353,7 @@ export default function HomePage() {
               href={boda.galeriaUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-block rounded-full bg-[#3b2b20] px-6 py-3 text-white transition hover:scale-105"
+              className="mt-6 inline-block rounded-full bg-[#3b2b20] px-6 py-3 text-sm text-white transition hover:scale-105"
             >
               Ver galería
             </a>
