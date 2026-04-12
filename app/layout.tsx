@@ -23,6 +23,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body className={playfair.className}>{children}</body>
     </html>
   );
