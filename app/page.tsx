@@ -27,28 +27,28 @@ export default function HomePage() {
 
   if (!open) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#f5efe6] px-4 py-10 text-center text-[#3b2b20] sm:px-6">
-        <div className="w-full max-w-md rounded-[2rem] border border-[#d9cbb9] bg-white p-8 shadow-2xl transition-all duration-700 hover:scale-[1.02] sm:p-10">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-[#8b6b4f] sm:text-xs">
+      <div className="flex min-h-screen items-center justify-center bg-[#f5efe6] px-6 text-center text-[#3b2b20]">
+        <div className="w-full max-w-md rounded-[2rem] border border-[#d9cbb9] bg-white p-10 shadow-2xl">
+          <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f]">
             Invitación
           </p>
 
-          <h1 className={`mt-5 text-4xl sm:mt-6 sm:text-5xl ${greatVibes.className}`}>
+          <h1 className={`mt-6 text-5xl ${greatVibes.className}`}>
             {boda.nombres}
           </h1>
 
-          <p className="mt-5 text-sm leading-7 text-[#5a4633] sm:mt-6 sm:text-base sm:leading-8">
+          <p className="mt-6 leading-8 text-[#5a4633]">
             Tenemos el placer de invitarte a compartir con nosotros uno de los
             días más importantes de nuestras vidas.
           </p>
 
-          <p className="mt-5 text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:mt-6 sm:text-sm">
+          <p className="mt-6 text-sm uppercase tracking-[0.2em] text-[#8b6b4f]">
             {boda.fecha}
           </p>
 
           <button
             onClick={() => setOpen(true)}
-            className="mt-7 rounded-full bg-[#3b2b20] px-8 py-3 text-sm text-white transition-all duration-500 hover:scale-105 hover:bg-[#5a4633] sm:mt-8"
+            className="mt-8 rounded-full bg-[#3b2b20] px-8 py-3 text-white"
           >
             Abrir invitación
           </button>
@@ -58,102 +58,39 @@ export default function HomePage() {
   }
 
   return (
-    <main className="animate-fadeIn bg-[#f5efe6] text-[#3b2b20]">
-      <header className="sticky top-0 z-50 border-b border-[#d9cbb9] bg-[#f5efe6]/95 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 md:py-5">
-          <div className="flex items-center justify-between gap-4">
-            <a
-              href="#bienvenidos"
-              className="text-2xl font-light tracking-wide sm:text-3xl md:text-4xl"
-            >
-              A&amp;B
-            </a>
-
-            <div className="hidden md:block">
-              <nav className="flex gap-8 text-sm uppercase tracking-[0.22em]">
-                <a href="#bienvenidos" className="transition hover:text-[#8b6b4f]">
-                  ¡Bienvenidos!
-                </a>
-                <a href="#blog" className="transition hover:text-[#8b6b4f]">
-                  Blog de boda
-                </a>
-                <a href="#rsvp" className="transition hover:text-[#8b6b4f]">
-                  Confirma tu asistencia
-                </a>
-                <a href="#contacto" className="transition hover:text-[#8b6b4f]">
-                  Contáctanos
-                </a>
-                <a href="#galeria" className="transition hover:text-[#8b6b4f]">
-                  Galería
-                </a>
-              </nav>
-            </div>
-          </div>
-
-          <div className="mt-4 overflow-x-auto md:hidden">
-            <nav className="flex min-w-max gap-5 whitespace-nowrap text-[11px] uppercase tracking-[0.2em] text-[#5a4633]">
-              <a href="#bienvenidos" className="transition hover:text-[#8b6b4f]">
-                ¡Bienvenidos!
-              </a>
-              <a href="#blog" className="transition hover:text-[#8b6b4f]">
-                Blog
-              </a>
-              <a href="#rsvp" className="transition hover:text-[#8b6b4f]">
-                RSVP
-              </a>
-              <a href="#contacto" className="transition hover:text-[#8b6b4f]">
-                Contacto
-              </a>
-              <a href="#galeria" className="transition hover:text-[#8b6b4f]">
-                Galería
-              </a>
-            </nav>
-          </div>
-        </div>
-      </header>
-
-      <section
-        id="bienvenidos"
-        className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12 text-center sm:px-6 md:px-6"
-      >
+    <main className="bg-[#f5efe6] text-[#3b2b20]">
+      {/* HERO */}
+      <section className="relative flex min-h-screen items-center justify-center text-center">
         <Image
           src="/novios.jpg"
-          alt="Foto de los novios"
+          alt="novios"
           fill
-          priority
-          sizes="100vw"
-          className="object-cover blur-[2px]"
+          className="object-cover"
         />
 
-        <div className="absolute inset-0 bg-[#2a1d15]/50" />
+        <div className="absolute inset-0 bg-black/40" />
 
-        <div className="relative z-10 w-full max-w-5xl rounded-[2rem] border border-white/20 bg-white/10 px-6 py-8 shadow-2xl backdrop-blur-md sm:px-8 sm:py-10 md:max-w-6xl md:rounded-[2.5rem] md:px-16 md:py-14">
-          <p className="text-xs uppercase tracking-[0.3em] text-white/90 sm:text-sm md:text-base md:tracking-[0.35em]">
-            {boda.mensaje}
-          </p>
-
-          <h1
-            className={`mt-4 text-4xl text-white sm:text-5xl md:text-7xl ${greatVibes.className}`}
-          >
+        <div className="relative z-10 text-white">
+          <h1 className={`text-6xl ${greatVibes.className}`}>
             {boda.nombres}
           </h1>
 
-          <div className="mt-5">
-            <Countdown />
-          </div>
-
-          <p className="mt-5 text-sm text-white sm:text-base md:text-xl">
+          <p className="mt-4 text-xl">
             {boda.fecha} · {boda.hora}
           </p>
 
-          <p className="mt-2 text-xs text-[#e6d7c3] sm:text-sm md:text-base">
+          <p className="mt-2">
             {boda.lugar} — {boda.ciudad}
           </p>
 
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
+          <div className="mt-6">
+            <Countdown />
+          </div>
+
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row justify-center">
             <a
               href="/rsvp"
-              className="rounded-full border border-white px-8 py-3 text-sm text-white transition hover:scale-105 hover:bg-white hover:text-black"
+              className="rounded-full border px-6 py-3"
             >
               Confirmar asistencia
             </a>
@@ -161,8 +98,7 @@ export default function HomePage() {
             <a
               href={boda.mapsUrl}
               target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-white px-8 py-3 text-sm text-black transition hover:scale-105"
+              className="rounded-full bg-white px-6 py-3 text-black"
             >
               Ver ubicación
             </a>
@@ -170,194 +106,133 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* BLOG + INVITACIÓN */}
       <FadeIn>
-        <section id="blog" className="px-4 py-14 sm:px-6 sm:py-16 md:py-20">
-          <div className="mx-auto max-w-6xl space-y-10 md:space-y-16">
-            <div className="grid items-center gap-8 rounded-[2rem] bg-[#f5efe6] p-6 shadow-xl sm:p-8 md:grid-cols-2 md:gap-10 md:p-10">
-              <div className="overflow-hidden rounded-[1.5rem]">
-                <Image
-                  src="/alianzas-doradas.jpg"
-                  alt="alianzas"
-                  width={900}
-                  height={700}
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                />
-              </div>
+        <section className="px-6 py-20">
+          <div className="mx-auto max-w-6xl space-y-16">
+
+            {/* HISTORIA */}
+            <div className="grid md:grid-cols-2 gap-10 bg-white p-10 rounded-[2rem] shadow">
+              <Image
+                src="/alianzas-doradas.jpg"
+                alt="alianzas"
+                width={800}
+                height={600}
+                className="rounded-xl"
+              />
 
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f] sm:text-sm">
-                  Blog de boda
+                <h2 className="text-4xl font-light">Nuestra historia</h2>
+
+                <p className="mt-6">
+                  Este es el blog del que será el día más importante de nuestras vidas.
                 </p>
-
-                <h2 className="mt-4 text-3xl font-light sm:text-4xl">
-                  Nuestra historia
-                </h2>
-
-                <div className="mt-6 space-y-5 text-sm leading-7 text-[#5a4633] sm:mt-8 sm:text-base sm:leading-8">
-                  <p>Hola a todos!!!</p>
-
-                  <p>
-                    Este es el blog del que será el día más importante de
-                    nuestras vidas ¡¡¡nuestra boda!!!
-                  </p>
-
-                  <p>
-                    Será un día super especial que queremos compartir con todos
-                    vosotros, pero hasta que llegue aún tenemos mucho trabajo
-                    por delante. Usaremos este blog para manteneros al día de
-                    cualquier novedad y para explicaros cómo llevamos todo lo de
-                    la organización, los nervios, el estrés y muchísima
-                    felicidad.
-                  </p>
-
-                  <p>
-                    Esperamos que disfrutéis tanto como nosotros, un abrazo
-                    muuuy grande!!!
-                  </p>
-                </div>
               </div>
             </div>
 
-            <div className="grid overflow-hidden rounded-[2rem] shadow-xl md:grid-cols-2">
-              <div className="relative min-h-[280px] md:min-h-[560px]">
+            {/* INVITACIÓN OFICIAL */}
+            <div className="grid md:grid-cols-2 overflow-hidden rounded-[2rem] shadow-xl">
+              <div className="relative min-h-[400px]">
                 <Image
                   src="/flores-boho.jpg"
                   alt="decoración"
                   fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 hover:scale-105"
+                  className="object-cover"
                 />
               </div>
 
-              <div className="bg-[#f5efe6] p-6 sm:p-8 md:p-10">
-                <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f] sm:text-sm">
+              <div className="bg-[#f5efe6] p-10">
+                <h2 className="text-4xl font-light">
                   Invitación oficial
-                </p>
-
-                <h2 className="mt-4 text-3xl font-light sm:text-4xl">
-                  Queridos familiares y amigos
                 </h2>
 
-                <div className="mt-6 space-y-5 text-sm leading-7 text-[#5a4633] sm:mt-8 sm:text-base sm:leading-8">
-                  <p>
-                    Nos hace muchísima ilusión invitaros a formar parte de uno
-                    de los días más importantes de nuestras vidas. Queremos
-                    celebrar nuestro amor rodeados de las personas que más
-                    queremos, y vosotros sois una parte muy especial de ello.
-                  </p>
+                <div className="mt-8 space-y-6 text-[#5a4633] leading-8">
 
                   <p>
-                    El día estará lleno de momentos inolvidables, risas y mucho
-                    cariño, y nos encantaría compartirlo con todos vosotros.
-                  </p>
-
-                  <p>
-                    La celebración del banquete tendrá lugar en Complejo La
-                    Cigüeña.
-                  </p>
-
-                  <p>
-                    Como sabéis, organizar este día conlleva muchos detalles,
-                    por eso queríamos comentaros con total confianza que el
-                    coste del cubierto es aproximadamente de 130€ por persona.
+                    Nos hace muchísima ilusión invitaros a formar parte de uno de
+                    los días más importantes de nuestras vidas.
                   </p>
 
                   <p>
                     Para poder organizar cada detalle con todo el cariño que
-                    merece, os agradeceríamos que confirméis vuestra asistencia
-                    antes del 20 de mayo.
+                    merece, os pedimos que confirméis vuestra asistencia y
+                    realicéis la aportación correspondiente
+                    <strong> antes del 1 de junio de 2026</strong>.
+                  </p>
+
+                  <p>La aportación es de:</p>
+
+                  <ul className="list-disc pl-5">
+                    <li><strong>130 € por adulto</strong></li>
+                    <li><strong>55 € menores de 12 años</strong></li>
+                  </ul>
+
+                  <p>
+                    Si deseáis traer acompañantes, por favor consultadlo
+                    previamente.
                   </p>
 
                   <p>
-                    Si deseáis acompañarnos en la celebración, podéis hacerlo
-                    mediante ingreso en el siguiente número de cuenta:
+                    La reserva quedará confirmada una vez recibamos la aportación.
                   </p>
 
-                  <p className="text-base font-medium tracking-wide text-[#3b2b20] sm:text-lg md:text-xl">
+                  <p>
+                    Número de cuenta:
+                  </p>
+
+                  <p className="font-semibold">
                     ES54 0073 0100 5905 9909 4910
                   </p>
 
                   <p>
-                    Gracias de corazón por formar parte de este momento tan
-                    especial para nosotros.
+                    Con cariño,
                   </p>
 
-                  <p>Con muchísimo cariño,</p>
-
-                  <p className="text-base font-medium text-[#3b2b20] sm:text-lg md:text-xl">
-                    Brigitte &amp; Alexander 💍
+                  <p className="font-semibold">
+                    Brigitte & Alexander 💍
                   </p>
+
                 </div>
               </div>
             </div>
+
           </div>
         </section>
       </FadeIn>
 
+      {/* RSVP */}
       <FadeIn>
-        <section id="rsvp" className="px-4 pb-14 text-center sm:px-6 sm:pb-16 md:pb-20">
-          <div className="mx-auto max-w-5xl rounded-[2rem] bg-[#3b2b20] p-8 text-white shadow-xl sm:p-10">
-            <p className="text-xs uppercase tracking-[0.3em] text-[#d6c2a8] sm:text-sm">
-              Confirma tu asistencia
-            </p>
+        <section id="rsvp" className="px-6 pb-20 text-center">
+          <h2 className="text-4xl font-light">Confirma tu asistencia</h2>
 
-            <h2 className="mt-4 text-3xl font-light sm:text-4xl">RSVP</h2>
-
-            <p className="mt-4 text-base sm:text-xl">
-              ¿Nos acompañas o te lo pierdes?
-            </p>
-
-            <a
-              href="/rsvp"
-              className="mt-6 inline-block rounded-full bg-white px-6 py-3 text-sm text-[#3b2b20] transition hover:scale-105"
-            >
-              Ir al formulario
-            </a>
-          </div>
+          <a
+            href="/rsvp"
+            className="mt-6 inline-block bg-[#3b2b20] text-white px-6 py-3 rounded-full"
+          >
+            Ir al formulario
+          </a>
         </section>
       </FadeIn>
 
+      {/* CONTACTO */}
       <FadeIn>
-        <section id="contacto" className="px-4 pb-14 sm:px-6 sm:pb-16 md:pb-20">
-          <div className="mx-auto max-w-5xl rounded-[2rem] bg-[#f5efe6] p-6 shadow-xl sm:p-8 md:p-10">
-            <h2 className="mb-6 text-center text-3xl font-light sm:text-4xl">
-              ¿Alguna duda?
-            </h2>
-
-            <ContactForm endpoint={boda.contactoFormUrl} />
-          </div>
+        <section className="px-6 pb-20">
+          <ContactForm endpoint={boda.contactoFormUrl} />
         </section>
       </FadeIn>
 
+      {/* GALERÍA */}
       <FadeIn>
-        <section id="galeria" className="px-4 pb-20 text-center sm:px-6 sm:pb-24">
-          <div className="mx-auto max-w-3xl rounded-[1.5rem] bg-[#f5efe6] p-6 shadow-lg sm:p-8">
-            <h2 className="text-2xl font-light sm:text-3xl">
-              Comparte tus fotos
-            </h2>
+        <section className="px-6 pb-20 text-center">
+          <h2 className="text-3xl font-light">Galería</h2>
 
-            <p className="mt-3 text-sm leading-7 text-[#5a4633] sm:text-base">
-              Escanea el código o entra directamente en la galería para subir y
-              ver recuerdos de este día tan especial.
-            </p>
-
-            <Image
-              src="/qr-galeria.png"
-              alt="qr"
-              width={150}
-              height={150}
-              className="mx-auto mt-6"
-            />
-
-            <a
-              href={boda.galeriaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-block rounded-full bg-[#3b2b20] px-6 py-3 text-sm text-white transition hover:scale-105"
-            >
-              Ver galería
-            </a>
-          </div>
+          <a
+            href={boda.galeriaUrl}
+            target="_blank"
+            className="mt-6 inline-block bg-[#3b2b20] text-white px-6 py-3 rounded-full"
+          >
+            Ver galería
+          </a>
         </section>
       </FadeIn>
 
