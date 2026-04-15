@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import {
   House,
@@ -84,11 +84,13 @@ export default function HomePage() {
   if (!open) {
     return (
       <>
-        <Sobre
-          setInvitado={setInvitado}
-          setAdultosInvitados={setAdultosInvitados}
-          setNinosInvitados={setNinosInvitados}
-        />
+        <Suspense fallback={null}>
+          <Sobre
+            setInvitado={setInvitado}
+            setAdultosInvitados={setAdultosInvitados}
+            setNinosInvitados={setNinosInvitados}
+          />
+        </Suspense>
 
         <div className="flex min-h-screen items-center justify-center bg-[#f5efe6] px-4 py-10 text-center text-[#3b2b20] sm:px-6">
           <div className="w-full max-w-md rounded-[2rem] border border-[#d9cbb9] bg-white p-8 shadow-2xl sm:p-10">
@@ -148,11 +150,13 @@ export default function HomePage() {
 
   return (
     <main className="bg-[#f5efe6] text-[#3b2b20]">
-      <Sobre
-        setInvitado={setInvitado}
-        setAdultosInvitados={setAdultosInvitados}
-        setNinosInvitados={setNinosInvitados}
-      />
+      <Suspense fallback={null}>
+        <Sobre
+          setInvitado={setInvitado}
+          setAdultosInvitados={setAdultosInvitados}
+          setNinosInvitados={setNinosInvitados}
+        />
+      </Suspense>
 
       <div
         className={`fixed inset-0 z-[60] bg-black/30 backdrop-blur-[3px] transition-opacity duration-300 md:hidden ${
@@ -172,7 +176,7 @@ export default function HomePage() {
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-[11px] uppercase tracking-[0.32em] text-[#8b6b4f]">
-                Invitación TEST
+                Invitación
               </p>
               <h2 className={`mt-2 text-3xl ${greatVibes.className}`}>
                 Brigitte &amp; Alexander
@@ -632,4 +636,4 @@ export default function HomePage() {
       </div>
     </main>
   );
-  }
+}
