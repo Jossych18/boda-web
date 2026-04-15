@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   Menu,
@@ -33,20 +33,50 @@ const boda = {
   contactoFormUrl: "https://formspree.io/f/xeepyyey",
 };
 
-const mobileLinks = [
-  { href: "#bienvenidos", label: "Bienvenidos", icon: House },
-  { href: "#blog", label: "Nuestra historia", icon: Heart },
-  { href: "#invitacion", label: "Invitación oficial", icon: Mail },
-  { href: "#rsvp", label: "Confirmar asistencia", icon: CircleCheck },
-  { href: "#contacto", label: "Contacto", icon: Phone },
-  { href: "#galeria", label: "Galería", icon: Images },
+const navLinks = [
+  { href: "#bienvenidos", id: "bienvenidos", label: "Bienvenidos", icon: House },
+  { href: "#blog", id: "blog", label: "Historia", icon: Heart },
+  { href: "#invitacion", id: "invitacion", label: "Invitación", icon: Mail },
+  { href: "#rsvp", id: "rsvp", label: "RSVP", icon: CircleCheck },
+  { href: "#contacto", id: "contacto", label: "Contacto", icon: Phone },
+  { href: "#galeria", id: "galeria", label: "Galería", icon: Images },
 ];
 
 export default function HomePage() {
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("bienvenidos");
 
   const closeMenu = () => setMenuOpen(false);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const sections = navLinks
+      .map((item) => document.getElementById(item.id))
+      .filter(Boolean) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible.length > 0) {
+          setActiveSection(visible[0].target.id);
+        }
+      },
+      {
+        root: null,
+        rootMargin: "-20% 0px -55% 0px",
+        threshold: [0.2, 0.35, 0.5, 0.7],
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [open]);
 
   if (!open) {
     return (
@@ -110,7 +140,7 @@ export default function HomePage() {
 
             <button
               type="button"
-              onClick={closeMenu}
+              onClick={() => setMenuOpen(false)}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d9cbb9] bg-white/70 text-[#3b2b20] transition hover:bg-white"
               aria-label="Cerrar menú"
             >
@@ -120,22 +150,46 @@ export default function HomePage() {
         </div>
 
         <nav className="flex flex-col px-4 py-4">
-          {mobileLinks.map((item) => {
+          {navLinks.map((item) => {
             const Icon = item.icon;
+            const isActive = activeSection === item.id;
+
             return (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={closeMenu}
-                className="flex items-center justify-between rounded-2xl px-3 py-4 text-[#3b2b20] transition hover:bg-white/70"
+                className={`flex items-center justify-between rounded-2xl px-3 py-4 transition ${
+                  isActive ? "bg-white shadow-sm" : "hover:bg-white/70"
+                }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#efe5d8] text-[#6b4f3a]">
+                  <div
+                    className={`flex h-10 w-10 items-center justify-center rounded-full ${
+                      isActive
+                        ? "bg-[#3b2b20] text-white"
+                        : "bg-[#efe5d8] text-[#6b4f3a]"
+                    }`}
+                  >
                     <Icon size={18} />
                   </div>
-                  <span className="text-[15px]">{item.label}</span>
+
+                  <span
+                    className={`text-[15px] ${
+                      isActive ? "font-medium text-[#3b2b20]" : "text-[#3b2b20]"
+                    }`}
+                  >
+                    {item.label}
+                  </span>
                 </div>
-                <span className="text-xl text-[#8b6b4f]">›</span>
+
+                <span
+                  className={`text-xl ${
+                    isActive ? "text-[#3b2b20]" : "text-[#8b6b4f]"
+                  }`}
+                >
+                  ›
+                </span>
               </a>
             );
           })}
@@ -158,11 +212,27 @@ export default function HomePage() {
           <div className="flex items-center gap-4">
             <button
               type="button"
-              onClick={() => setMenuOpen(true)}
+              onClick={() => setMenuOpen(!menuOpen)}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d9cbb9] bg-white/70 text-[#3b2b20] transition hover:bg-white md:hidden"
               aria-label="Abrir menú"
             >
-              <Menu size={22} />
+              <div className="relative h-5 w-5">
+                <span
+                  className={`absolute left-0 top-[4px] h-[2px] w-5 origin-center rounded-full bg-[#3b2b20] transition duration-300 ${
+                    menuOpen ? "translate-y-[5px] rotate-45" : ""
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 top-[9px] h-[2px] w-5 rounded-full bg-[#3b2b20] transition duration-300 ${
+                    menuOpen ? "opacity-0" : "opacity-100"
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 top-[14px] h-[2px] w-5 origin-center rounded-full bg-[#3b2b20] transition duration-300 ${
+                    menuOpen ? "-translate-y-[5px] -rotate-45" : ""
+                  }`}
+                />
+              </div>
             </button>
 
             <a
@@ -173,25 +243,27 @@ export default function HomePage() {
             </a>
           </div>
 
-          <nav className="hidden gap-8 text-sm uppercase tracking-[0.22em] md:flex">
-            <a href="#bienvenidos" className="transition hover:text-[#8b6b4f]">
-              Bienvenidos
-            </a>
-            <a href="#blog" className="transition hover:text-[#8b6b4f]">
-              Historia
-            </a>
-            <a href="#invitacion" className="transition hover:text-[#8b6b4f]">
-              Invitación
-            </a>
-            <a href="#rsvp" className="transition hover:text-[#8b6b4f]">
-              RSVP
-            </a>
-            <a href="#contacto" className="transition hover:text-[#8b6b4f]">
-              Contacto
-            </a>
-            <a href="#galeria" className="transition hover:text-[#8b6b4f]">
-              Galería
-            </a>
+          <nav className="hidden items-center gap-8 md:flex">
+            {navLinks.map((item) => {
+              const isActive = activeSection === item.id;
+
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className={`relative pb-1 text-sm uppercase tracking-[0.22em] transition ${
+                    isActive ? "text-[#3b2b20]" : "hover:text-[#8b6b4f]"
+                  }`}
+                >
+                  {item.label}
+                  <span
+                    className={`absolute bottom-0 left-0 h-[2px] rounded-full bg-[#3b2b20] transition-all duration-300 ${
+                      isActive ? "w-full opacity-100" : "w-0 opacity-0"
+                    }`}
+                  />
+                </a>
+              );
+            })}
           </nav>
         </div>
       </header>
@@ -246,8 +318,9 @@ export default function HomePage() {
               href={boda.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-white px-8 py-3 text-sm text-black transition hover:opacity-90"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-3 text-sm text-black transition hover:opacity-90"
             >
+              <MapPinned size={16} />
               Ver ubicación
             </a>
           </div>
@@ -473,6 +546,44 @@ export default function HomePage() {
           </div>
         </section>
       </FadeIn>
+
+      <footer className="border-t border-[#d9cbb9] bg-[#efe6db] px-4 py-12 sm:px-6">
+        <div className="mx-auto max-w-6xl text-center">
+          <p className="text-xs uppercase tracking-[0.35em] text-[#8b6b4f]">
+            Gracias por acompañarnos
+          </p>
+
+          <h2 className={`mt-4 text-4xl text-[#3b2b20] sm:text-5xl ${greatVibes.className}`}>
+            Brigitte &amp; Alexander
+          </h2>
+
+          <p className="mt-4 text-sm leading-7 text-[#5a4633] sm:text-base">
+            Con muchísima ilusión esperamos celebrar este día junto a vosotros.
+          </p>
+
+          <p className="mt-4 text-sm text-[#5a4633]">
+            {boda.fecha} · {boda.lugar}
+          </p>
+
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href="/rsvp"
+              className="rounded-full bg-[#3b2b20] px-6 py-3 text-sm text-white transition hover:bg-[#5a4633]"
+            >
+              Confirmar asistencia
+            </a>
+
+            <a
+              href={boda.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-[#3b2b20] px-6 py-3 text-sm text-[#3b2b20] transition hover:bg-white"
+            >
+              Ver ubicación
+            </a>
+          </div>
+        </div>
+      </footer>
 
       <div className="fixed bottom-5 right-5 z-40">
         <MusicToggle />
