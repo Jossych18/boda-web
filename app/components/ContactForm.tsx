@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 
-export default function ContactForm({ endpoint }: { endpoint: string }) {
+type ContactFormProps = {
+  endpoint: string;
+};
+
+export default function ContactForm({ endpoint }: ContactFormProps) {
   const [enviado, setEnviado] = useState(false);
   const [nombre, setNombre] = useState("");
 

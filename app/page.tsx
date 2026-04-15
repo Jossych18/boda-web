@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
 import {
   House,
   Heart,
@@ -17,6 +16,7 @@ import ContactForm from "./components/ContactForm";
 import FadeIn from "./components/FadeIn";
 import Countdown from "./components/Countdown";
 import MusicToggle from "./components/MusicToggle";
+import Sobre from "./components/Sobre";
 
 const boda = {
   nombres: "Brigitte & Alexander",
@@ -42,8 +42,6 @@ const navLinks = [
 ];
 
 export default function HomePage() {
-  const searchParams = useSearchParams();
-
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("bienvenidos");
@@ -53,24 +51,6 @@ export default function HomePage() {
   const [ninosInvitados, setNinosInvitados] = useState<number | null>(null);
 
   const closeMenu = () => setMenuOpen(false);
-
-  useEffect(() => {
-    const nombreUrl = searchParams.get("r");
-    const adultosUrl = searchParams.get("ad");
-    const ninosUrl = searchParams.get("ni");
-
-    if (nombreUrl) setInvitado(nombreUrl);
-
-    if (adultosUrl) {
-      const n = Number(adultosUrl);
-      if (!Number.isNaN(n)) setAdultosInvitados(n);
-    }
-
-    if (ninosUrl) {
-      const n = Number(ninosUrl);
-      if (!Number.isNaN(n)) setNinosInvitados(n);
-    }
-  }, [searchParams]);
 
   useEffect(() => {
     if (!open) return;
@@ -103,63 +83,77 @@ export default function HomePage() {
 
   if (!open) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#f5efe6] px-4 py-10 text-center text-[#3b2b20] sm:px-6">
-        <div className="w-full max-w-md rounded-[2rem] border border-[#d9cbb9] bg-white p-8 shadow-2xl sm:p-10">
-          <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f]">
-            Invitación
-          </p>
+      <>
+        <Sobre
+          setInvitado={setInvitado}
+          setAdultosInvitados={setAdultosInvitados}
+          setNinosInvitados={setNinosInvitados}
+        />
 
-          <h1 className={`mt-6 text-4xl sm:text-5xl ${greatVibes.className}`}>
-            {boda.nombres}
-          </h1>
-
-          {invitado ? (
-            <p className="mt-5 text-base leading-7 text-[#5a4633] sm:text-lg">
-              Para <strong>{invitado}</strong>
+        <div className="flex min-h-screen items-center justify-center bg-[#f5efe6] px-4 py-10 text-center text-[#3b2b20] sm:px-6">
+          <div className="w-full max-w-md rounded-[2rem] border border-[#d9cbb9] bg-white p-8 shadow-2xl sm:p-10">
+            <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f]">
+              Invitación
             </p>
-          ) : (
-            <p className="mt-5 text-sm leading-7 text-[#5a4633] sm:text-base sm:leading-8">
-              Tenemos el placer de invitarte a compartir con nosotros uno de los
-              días más importantes de nuestras vidas.
+
+            <h1 className={`mt-6 text-4xl sm:text-5xl ${greatVibes.className}`}>
+              {boda.nombres}
+            </h1>
+
+            {invitado ? (
+              <p className="mt-5 text-base leading-7 text-[#5a4633] sm:text-lg">
+                Para <strong>{invitado}</strong>
+              </p>
+            ) : (
+              <p className="mt-5 text-sm leading-7 text-[#5a4633] sm:text-base sm:leading-8">
+                Tenemos el placer de invitarte a compartir con nosotros uno de los
+                días más importantes de nuestras vidas.
+              </p>
+            )}
+
+            {(adultosInvitados !== null || ninosInvitados !== null) && (
+              <div className="mt-5 rounded-[1.5rem] border border-[#e7d8c7] bg-[#faf6f1] p-4 text-sm leading-7 text-[#5a4633]">
+                <p className="text-xs uppercase tracking-[0.25em] text-[#8b6b4f]">
+                  Sobre personalizado
+                </p>
+
+                <p className="mt-3">
+                  Invitación prevista para{" "}
+                  <strong>{adultosInvitados ?? 0}</strong> adulto(s)
+                  {ninosInvitados !== null && (
+                    <>
+                      {" "}y <strong>{ninosInvitados}</strong> niño(s)
+                    </>
+                  )}
+                  .
+                </p>
+              </div>
+            )}
+
+            <p className="mt-6 text-sm uppercase tracking-[0.2em] text-[#8b6b4f]">
+              {boda.fecha}
             </p>
-          )}
 
-          {(adultosInvitados !== null || ninosInvitados !== null) && (
-            <div className="mt-5 rounded-[1.5rem] border border-[#e7d8c7] bg-[#faf6f1] p-4 text-sm leading-7 text-[#5a4633]">
-              <p className="text-xs uppercase tracking-[0.25em] text-[#8b6b4f]">
-                Sobre personalizado
-              </p>
-
-              <p className="mt-3">
-                Invitación prevista para{" "}
-                <strong>{adultosInvitados ?? 0}</strong> adulto(s)
-                {ninosInvitados !== null && (
-                  <>
-                    {" "}y <strong>{ninosInvitados}</strong> niño(s)
-                  </>
-                )}
-                .
-              </p>
-            </div>
-          )}
-
-          <p className="mt-6 text-sm uppercase tracking-[0.2em] text-[#8b6b4f]">
-            {boda.fecha}
-          </p>
-
-          <button
-            onClick={() => setOpen(true)}
-            className="mt-8 rounded-full bg-[#3b2b20] px-8 py-3 text-white transition duration-300 hover:bg-[#5a4633]"
-          >
-            Abrir sobre
-          </button>
+            <button
+              onClick={() => setOpen(true)}
+              className="mt-8 rounded-full bg-[#3b2b20] px-8 py-3 text-white transition duration-300 hover:bg-[#5a4633]"
+            >
+              Abrir sobre
+            </button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   return (
     <main className="bg-[#f5efe6] text-[#3b2b20]">
+      <Sobre
+        setInvitado={setInvitado}
+        setAdultosInvitados={setAdultosInvitados}
+        setNinosInvitados={setNinosInvitados}
+      />
+
       <div
         className={`fixed inset-0 z-[60] bg-black/30 backdrop-blur-[3px] transition-opacity duration-300 md:hidden ${
           menuOpen
