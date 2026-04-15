@@ -172,7 +172,7 @@ export default function HomePage() {
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-[11px] uppercase tracking-[0.32em] text-[#8b6b4f]">
-                Invitación
+                Invitación TEST
               </p>
               <h2 className={`mt-2 text-3xl ${greatVibes.className}`}>
                 Brigitte &amp; Alexander
