@@ -6,13 +6,15 @@ import Link from "next/link";
 export default function RsvpPage() {
   const [enviado, setEnviado] = useState(false);
   const [nombre, setNombre] = useState("");
+  const [asistencia, setAsistencia] = useState("Sí, asistiré");
   const [adultos, setAdultos] = useState(1);
   const [ninos, setNinos] = useState(0);
 
   const PRECIO_ADULTO = 130;
   const PRECIO_NINO = 55;
 
-  const total = adultos * PRECIO_ADULTO + ninos * PRECIO_NINO;
+  const asistira = asistencia === "Sí, asistiré";
+  const total = asistira ? adultos * PRECIO_ADULTO + ninos * PRECIO_NINO : 0;
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -32,6 +34,7 @@ export default function RsvpPage() {
       setNombre((data.get("nombre") as string) || "");
       setEnviado(true);
       form.reset();
+      setAsistencia("Sí, asistiré");
       setAdultos(1);
       setNinos(0);
     }
@@ -39,27 +42,34 @@ export default function RsvpPage() {
 
   if (enviado) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#3b2b20] px-4 py-10 text-[#f5efe6] sm:px-6">
-        <div className="w-full max-w-2xl rounded-[2rem] bg-[#f5efe6] p-8 text-center text-[#3b2b20] shadow-2xl sm:p-10">
-          <h1 className="text-3xl font-light sm:text-4xl">
-            ¡Gracias{nombre ? `, ${nombre}` : ""}!
-          </h1>
+      <main className="min-h-screen bg-[#3b2b20] px-4 py-10 text-[#f5efe6] sm:px-6 sm:py-16">
+        <div className="mx-auto flex min-h-[80vh] max-w-3xl items-center justify-center">
+          <div className="w-full rounded-[2rem] border border-[#e5d8ca] bg-[#f5efe6] p-8 text-center text-[#3b2b20] shadow-2xl sm:p-10">
+            <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f]">
+              Confirmación recibida
+            </p>
 
-          <p className="mt-4 text-base text-[#5a4633] sm:text-lg">
-            Hemos recibido tu confirmación 💍
-          </p>
+            <h1 className="mt-4 text-3xl font-light sm:text-4xl">
+              ¡Gracias{nombre ? `, ${nombre}` : ""}!
+            </h1>
 
-          <p className="mt-3 text-sm text-[#8b6b4f] sm:text-base">
-            Recuerda realizar la aportación correspondiente antes del 1 de junio
-            de 2026 para confirmar la reserva.
-          </p>
+            <p className="mt-4 text-base leading-7 text-[#5a4633] sm:text-lg">
+              Hemos recibido tu respuesta 💍
+            </p>
 
-          <a
-            href="/"
-            className="mt-8 inline-block rounded-full bg-[#3b2b20] px-6 py-3 text-xs uppercase tracking-[0.25em] text-[#f5efe6] transition hover:bg-[#5a4633] sm:px-8 sm:text-sm"
-          >
-            Volver a la invitación
-          </a>
+            <p className="mt-3 text-sm leading-7 text-[#8b6b4f] sm:text-base">
+              {asistira
+                ? "Recuerda realizar la aportación correspondiente antes del 1 de junio de 2026 para confirmar la reserva."
+                : "Gracias por avisarnos con antelación."}
+            </p>
+
+            <Link
+              href="/"
+              className="mt-8 inline-block rounded-full bg-[#3b2b20] px-8 py-3 text-xs uppercase tracking-[0.25em] text-[#f5efe6] transition hover:bg-[#5a4633] sm:text-sm"
+            >
+              Volver a la invitación
+            </Link>
+          </div>
         </div>
       </main>
     );
@@ -67,174 +77,207 @@ export default function RsvpPage() {
 
   return (
     <main className="min-h-screen bg-[#3b2b20] px-4 py-10 text-[#f5efe6] sm:px-6 sm:py-16">
-      <div className="mx-auto max-w-3xl rounded-[2rem] bg-[#f5efe6] p-6 text-[#3b2b20] shadow-lg sm:p-8 md:p-10">
-        <Link
-          href="/"
-          className="inline-flex items-center text-xs uppercase tracking-[0.25em] text-[#8b6b4f] transition hover:opacity-70 sm:text-sm"
-        >
-          ← Volver a la invitación
-        </Link>
+      <div className="mx-auto max-w-4xl">
+        <div className="rounded-[2rem] border border-[#e5d8ca] bg-[#f5efe6] p-6 text-[#3b2b20] shadow-2xl sm:p-8 md:p-10">
+          <Link
+            href="/"
+            className="inline-flex items-center text-xs uppercase tracking-[0.25em] text-[#8b6b4f] transition hover:opacity-70 sm:text-sm"
+          >
+            ← Volver a la invitación
+          </Link>
 
-        <p className="mt-6 text-xs uppercase tracking-[0.3em] text-[#8b6b4f] sm:text-sm">
-          Confirmar asistencia
-        </p>
+          <div className="mt-6 max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f] sm:text-sm">
+              Confirmar asistencia
+            </p>
 
-        <h1 className="mt-4 text-3xl font-light sm:text-4xl">RSVP</h1>
+            <h1 className="mt-4 text-3xl font-light sm:text-4xl md:text-5xl">
+              RSVP
+            </h1>
 
-        <p className="mt-4 text-base text-[#5a4633] sm:text-lg">
-          Nos encantará contar contigo en este día tan especial.
-        </p>
+            <p className="mt-4 text-base leading-7 text-[#5a4633] sm:text-lg">
+              Nos encantará contar contigo en este día tan especial.
+            </p>
 
-        <p className="mt-3 text-sm text-[#8b6b4f] sm:text-base">
-          Por favor, confirma tu asistencia y realiza la aportación antes del
-          01.06.2026.
-        </p>
-
-        <form onSubmit={handleSubmit} className="mt-8 space-y-6 sm:mt-10">
-          <input
-            type="hidden"
-            name="_subject"
-            value="Nueva confirmación de boda 💍"
-          />
-
-          <input type="hidden" name="total_aportacion" value={total} />
-
-          <div>
-            <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
-              Nombre completo
-            </label>
-            <input
-              type="text"
-              name="nombre"
-              required
-              className="w-full rounded-2xl border border-[#d8c7b2] px-4 py-3 outline-none"
-              placeholder="Tu nombre"
-            />
-          </div>
-
-          <div>
-            <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
-              ¿Asistirás?
-            </label>
-            <select
-              name="asistencia"
-              className="w-full rounded-2xl border border-[#d8c7b2] px-4 py-3 outline-none"
-            >
-              <option>Sí, asistiré</option>
-              <option>No podré asistir</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
-              Número de adultos
-            </label>
-            <input
-              type="number"
-              name="adultos"
-              min="1"
-              value={adultos}
-              onChange={(e) => setAdultos(Number(e.target.value))}
-              className="w-full rounded-2xl border border-[#d8c7b2] px-4 py-3 outline-none"
-            />
-          </div>
-
-          <div>
-            <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
-              Número de niños
-            </label>
-            <input
-              type="number"
-              name="ninos"
-              min="0"
-              value={ninos}
-              onChange={(e) => setNinos(Number(e.target.value))}
-              className="w-full rounded-2xl border border-[#d8c7b2] px-4 py-3 outline-none"
-            />
-            <p className="mt-2 text-sm text-[#8b6b4f]">
-              Menú infantil disponible para niños de 3 a 12 años.
+            <p className="mt-3 text-sm leading-7 text-[#8b6b4f] sm:text-base">
+              Por favor, confirma tu asistencia y realiza la aportación antes del{" "}
+              <strong>01.06.2026</strong>.
             </p>
           </div>
 
-          <div>
-            <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
-              Menú adultos
-            </label>
-            <select
-              name="menu_adultos"
-              className="w-full rounded-2xl border border-[#d8c7b2] px-4 py-3 outline-none"
-            >
-              <option>Mediterráneo</option>
-              <option>Vegetariano</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
-              Número de menús infantiles
-            </label>
+          <form onSubmit={handleSubmit} className="mt-8 space-y-6 sm:mt-10">
             <input
-              type="number"
-              name="menus_infantiles"
-              min="0"
-              value={ninos}
-              onChange={(e) => setNinos(Number(e.target.value))}
-              className="w-full rounded-2xl border border-[#d8c7b2] px-4 py-3 outline-none"
-              placeholder="0"
+              type="hidden"
+              name="_subject"
+              value="Nueva confirmación de boda 💍"
             />
-          </div>
+            <input type="hidden" name="total_aportacion" value={total} />
 
-          <div className="rounded-2xl border border-[#d8c7b2] bg-[#f8f3ec] p-6 text-[#3b2b20]">
-            <p className="text-xs uppercase tracking-[0.25em] text-[#8b6b4f] sm:text-sm">
-              Importe orientativo
-            </p>
+            <div className="grid gap-6 md:grid-cols-2">
+              <div>
+                <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
+                  Nombre completo
+                </label>
+                <input
+                  type="text"
+                  name="nombre"
+                  required
+                  className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
+                  placeholder="Tu nombre"
+                />
+              </div>
 
-            <div className="mt-4 space-y-2 text-sm sm:text-base">
-              <p>
-                Adultos: {adultos} × {PRECIO_ADULTO} €
-              </p>
-              <p>
-                Menores de 12 años: {ninos} × {PRECIO_NINO} €
-              </p>
-              <p className="pt-2 text-lg font-medium sm:text-xl">
-                Total: {total} €
-              </p>
+              <div>
+                <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
+                  ¿Asistirás?
+                </label>
+                <select
+                  name="asistencia"
+                  value={asistencia}
+                  onChange={(e) => setAsistencia(e.target.value)}
+                  className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
+                >
+                  <option>Sí, asistiré</option>
+                  <option>No podré asistir</option>
+                </select>
+              </div>
             </div>
 
-            <p className="mt-4 text-sm text-[#5a4633]">
-              Por favor, realiza la aportación antes del{" "}
-              <strong>1 de junio de 2026</strong>.
-            </p>
+            {asistira && (
+              <>
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div>
+                    <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
+                      Número de adultos
+                    </label>
+                    <input
+                      type="number"
+                      name="adultos"
+                      min="1"
+                      value={adultos}
+                      onChange={(e) =>
+                        setAdultos(Math.max(1, Number(e.target.value) || 1))
+                      }
+                      className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
+                    />
+                  </div>
 
-            <p className="mt-2 text-sm text-[#5a4633]">
-              La reserva quedará confirmada una vez recibamos tanto la
-              confirmación como la aportación.
-            </p>
+                  <div>
+                    <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
+                      Niños menores de 12 años
+                    </label>
+                    <input
+                      type="number"
+                      name="ninos"
+                      min="0"
+                      value={ninos}
+                      onChange={(e) =>
+                        setNinos(Math.max(0, Number(e.target.value) || 0))
+                      }
+                      className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
+                    />
+                    <p className="mt-2 text-sm leading-6 text-[#8b6b4f]">
+                      La aportación para menores de 12 años es de 55 € por persona.
+                    </p>
+                  </div>
+                </div>
 
-            <p className="mt-3 text-sm">
-              IBAN: <strong>ES54 0073 0100 5905 9909 4910</strong>
-            </p>
-          </div>
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div>
+                    <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
+                      Menú adultos
+                    </label>
+                    <select
+                      name="menu_adultos"
+                      className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
+                    >
+                      <option>Mediterráneo</option>
+                      <option>Vegetariano</option>
+                    </select>
+                  </div>
 
-          <div>
-            <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
-              Mensaje
-            </label>
-            <textarea
-              name="mensaje"
-              rows={4}
-              className="w-full rounded-2xl border border-[#d8c7b2] px-4 py-3 outline-none"
-              placeholder="Escribe aquí tu mensaje"
-            />
-          </div>
+                  <div>
+                    <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
+                      Mensaje
+                    </label>
+                    <input
+                      type="text"
+                      name="mensaje_corto"
+                      className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
+                      placeholder="Alguna aclaración rápida"
+                    />
+                  </div>
+                </div>
 
-          <button
-            type="submit"
-            className="w-full rounded-full bg-[#3b2b20] px-8 py-3 text-xs uppercase tracking-[0.25em] text-[#f5efe6] transition hover:bg-[#5a4633] sm:w-auto sm:text-sm"
-          >
-            Enviar respuesta
-          </button>
-        </form>
+                <div className="rounded-[1.75rem] border border-[#d8c7b2] bg-[#f8f3ec] p-6 shadow-sm">
+                  <p className="text-xs uppercase tracking-[0.25em] text-[#8b6b4f] sm:text-sm">
+                    Importe orientativo
+                  </p>
+
+                  <div className="mt-4 grid gap-3 text-sm text-[#5a4633] sm:text-base">
+                    <p>
+                      Adultos: {adultos} × {PRECIO_ADULTO} €
+                    </p>
+                    <p>
+                      Menores de 12 años: {ninos} × {PRECIO_NINO} €
+                    </p>
+                    <p className="pt-2 text-lg font-medium text-[#3b2b20] sm:text-xl">
+                      Total: {total} €
+                    </p>
+                  </div>
+
+                  <div className="mt-5 space-y-2 text-sm leading-7 text-[#5a4633]">
+                    <p>
+                      Por favor, realiza la aportación antes del{" "}
+                      <strong>1 de junio de 2026</strong>.
+                    </p>
+                    <p>
+                      La reserva quedará confirmada una vez recibamos tanto la
+                      confirmación como la aportación.
+                    </p>
+                    <p>
+                      IBAN: <strong>ES54 0073 0100 5905 9909 4910</strong>
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {!asistira && (
+              <div className="rounded-[1.75rem] border border-[#d8c7b2] bg-[#f8f3ec] p-6 text-sm leading-7 text-[#5a4633] shadow-sm">
+                Gracias por avisarnos con antelación. Nos ayudará mucho en la
+                organización del día.
+              </div>
+            )}
+
+            <div>
+              <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
+                Mensaje
+              </label>
+              <textarea
+                name="mensaje"
+                rows={4}
+                className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
+                placeholder="Escribe aquí tu mensaje"
+              />
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <button
+                type="submit"
+                className="rounded-full bg-[#3b2b20] px-8 py-3 text-xs uppercase tracking-[0.25em] text-[#f5efe6] transition hover:bg-[#5a4633] sm:text-sm"
+              >
+                Enviar respuesta
+              </button>
+
+              <p className="text-sm text-[#8b6b4f]">
+                {asistira
+                  ? "Recuerda: la asistencia queda confirmada con el pago."
+                  : "Tu respuesta se enviará al momento."}
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </main>
   );
