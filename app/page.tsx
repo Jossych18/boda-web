@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import {
-  Menu,
-  X,
   House,
   Heart,
   Mail,
@@ -43,11 +42,35 @@ const navLinks = [
 ];
 
 export default function HomePage() {
+  const searchParams = useSearchParams();
+
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("bienvenidos");
 
+  const [invitado, setInvitado] = useState("");
+  const [adultosInvitados, setAdultosInvitados] = useState<number | null>(null);
+  const [ninosInvitados, setNinosInvitados] = useState<number | null>(null);
+
   const closeMenu = () => setMenuOpen(false);
+
+  useEffect(() => {
+    const nombreUrl = searchParams.get("r");
+    const adultosUrl = searchParams.get("ad");
+    const ninosUrl = searchParams.get("ni");
+
+    if (nombreUrl) setInvitado(nombreUrl);
+
+    if (adultosUrl) {
+      const n = Number(adultosUrl);
+      if (!Number.isNaN(n)) setAdultosInvitados(n);
+    }
+
+    if (ninosUrl) {
+      const n = Number(ninosUrl);
+      if (!Number.isNaN(n)) setNinosInvitados(n);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     if (!open) return;
@@ -90,10 +113,35 @@ export default function HomePage() {
             {boda.nombres}
           </h1>
 
-          <p className="mt-6 text-sm leading-7 text-[#5a4633] sm:text-base sm:leading-8">
-            Tenemos el placer de invitarte a compartir con nosotros uno de los
-            días más importantes de nuestras vidas.
-          </p>
+          {invitado ? (
+            <p className="mt-5 text-base leading-7 text-[#5a4633] sm:text-lg">
+              Para <strong>{invitado}</strong>
+            </p>
+          ) : (
+            <p className="mt-5 text-sm leading-7 text-[#5a4633] sm:text-base sm:leading-8">
+              Tenemos el placer de invitarte a compartir con nosotros uno de los
+              días más importantes de nuestras vidas.
+            </p>
+          )}
+
+          {(adultosInvitados !== null || ninosInvitados !== null) && (
+            <div className="mt-5 rounded-[1.5rem] border border-[#e7d8c7] bg-[#faf6f1] p-4 text-sm leading-7 text-[#5a4633]">
+              <p className="text-xs uppercase tracking-[0.25em] text-[#8b6b4f]">
+                Sobre personalizado
+              </p>
+
+              <p className="mt-3">
+                Invitación prevista para{" "}
+                <strong>{adultosInvitados ?? 0}</strong> adulto(s)
+                {ninosInvitados !== null && (
+                  <>
+                    {" "}y <strong>{ninosInvitados}</strong> niño(s)
+                  </>
+                )}
+                .
+              </p>
+            </div>
+          )}
 
           <p className="mt-6 text-sm uppercase tracking-[0.2em] text-[#8b6b4f]">
             {boda.fecha}
@@ -103,7 +151,7 @@ export default function HomePage() {
             onClick={() => setOpen(true)}
             className="mt-8 rounded-full bg-[#3b2b20] px-8 py-3 text-white transition duration-300 hover:bg-[#5a4633]"
           >
-            Abrir invitación
+            Abrir sobre
           </button>
         </div>
       </div>
@@ -144,7 +192,7 @@ export default function HomePage() {
               className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d9cbb9] bg-white/70 text-[#3b2b20] transition hover:bg-white"
               aria-label="Cerrar menú"
             >
-              <X size={22} />
+              ✕
             </button>
           </div>
         </div>

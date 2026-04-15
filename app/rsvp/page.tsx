@@ -1,11 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function RsvpPage() {
+  const searchParams = useSearchParams();
+
   const [enviado, setEnviado] = useState(false);
   const [nombre, setNombre] = useState("");
+  const [nombreInput, setNombreInput] = useState("");
   const [asistencia, setAsistencia] = useState("Sí, asistiré");
   const [adultos, setAdultos] = useState(1);
   const [ninos, setNinos] = useState(0);
@@ -15,6 +19,30 @@ export default function RsvpPage() {
 
   const asistira = asistencia === "Sí, asistiré";
   const total = asistira ? adultos * PRECIO_ADULTO + ninos * PRECIO_NINO : 0;
+
+  useEffect(() => {
+    const nombreUrl = searchParams.get("r");
+    const adultosUrl = searchParams.get("ad");
+    const ninosUrl = searchParams.get("ni");
+
+    if (nombreUrl) {
+      setNombreInput(nombreUrl);
+    }
+
+    if (adultosUrl) {
+      const adultosNum = Number(adultosUrl);
+      if (!Number.isNaN(adultosNum) && adultosNum > 0) {
+        setAdultos(adultosNum);
+      }
+    }
+
+    if (ninosUrl) {
+      const ninosNum = Number(ninosUrl);
+      if (!Number.isNaN(ninosNum) && ninosNum >= 0) {
+        setNinos(ninosNum);
+      }
+    }
+  }, [searchParams]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -37,6 +65,7 @@ export default function RsvpPage() {
       setAsistencia("Sí, asistiré");
       setAdultos(1);
       setNinos(0);
+      setNombreInput("");
     }
   }
 
@@ -105,6 +134,30 @@ export default function RsvpPage() {
             </p>
           </div>
 
+          {(nombreInput || adultos || ninos >= 0) && (
+            <div className="mt-6 rounded-[1.5rem] border border-[#d8c7b2] bg-[#f8f3ec] p-5 text-sm leading-7 text-[#5a4633]">
+              <p className="text-xs uppercase tracking-[0.25em] text-[#8b6b4f] sm:text-sm">
+                Invitación personalizada
+              </p>
+
+              {nombreInput && (
+                <p className="mt-3">
+                  Invitación preparada para: <strong>{nombreInput}</strong>
+                </p>
+              )}
+
+              <p className="mt-2">
+                Plazas previstas: <strong>{adultos}</strong> adulto(s) y{" "}
+                <strong>{ninos}</strong> niño(s).
+              </p>
+
+              <p className="mt-2 text-[#8b6b4f]">
+                Si necesitas consultar cualquier cambio o acompañante adicional,
+                por favor coméntalo previamente con nosotros.
+              </p>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="mt-8 space-y-6 sm:mt-10">
             <input
               type="hidden"
@@ -122,6 +175,8 @@ export default function RsvpPage() {
                   type="text"
                   name="nombre"
                   required
+                  value={nombreInput}
+                  onChange={(e) => setNombreInput(e.target.value)}
                   className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
                   placeholder="Tu nombre"
                 />
@@ -176,36 +231,6 @@ export default function RsvpPage() {
                       }
                       className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
                     />
-                    <p className="mt-2 text-sm leading-6 text-[#8b6b4f]">
-                      La aportación para menores de 12 años es de 55 € por persona.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
-                      Menú adultos
-                    </label>
-                    <select
-                      name="menu_adultos"
-                      className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
-                    >
-                      <option>Mediterráneo</option>
-                      <option>Vegetariano</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[#8b6b4f] sm:text-sm">
-                      Mensaje
-                    </label>
-                    <input
-                      type="text"
-                      name="mensaje_corto"
-                      className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
-                      placeholder="Alguna aclaración rápida"
-                    />
                   </div>
                 </div>
 
@@ -241,13 +266,6 @@ export default function RsvpPage() {
                   </div>
                 </div>
               </>
-            )}
-
-            {!asistira && (
-              <div className="rounded-[1.75rem] border border-[#d8c7b2] bg-[#f8f3ec] p-6 text-sm leading-7 text-[#5a4633] shadow-sm">
-                Gracias por avisarnos con antelación. Nos ayudará mucho en la
-                organización del día.
-              </div>
             )}
 
             <div>
