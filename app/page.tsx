@@ -2,6 +2,17 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import {
+  Menu,
+  X,
+  House,
+  Heart,
+  Mail,
+  CircleCheck,
+  Phone,
+  Images,
+  MapPinned,
+} from "lucide-react";
 import { greatVibes } from "./fonts";
 import ContactForm from "./components/ContactForm";
 import FadeIn from "./components/FadeIn";
@@ -21,6 +32,15 @@ const boda = {
     "https://drive.google.com/drive/folders/1mM-gea6B3jjAFZ1Wt45cbf48LCBJG8Rf?usp=sharing",
   contactoFormUrl: "https://formspree.io/f/xeepyyey",
 };
+
+const mobileLinks = [
+  { href: "#bienvenidos", label: "Bienvenidos", icon: House },
+  { href: "#blog", label: "Nuestra historia", icon: Heart },
+  { href: "#invitacion", label: "Invitación oficial", icon: Mail },
+  { href: "#rsvp", label: "Confirmar asistencia", icon: CircleCheck },
+  { href: "#contacto", label: "Contacto", icon: Phone },
+  { href: "#galeria", label: "Galería", icon: Images },
+];
 
 export default function HomePage() {
   const [open, setOpen] = useState(false);
@@ -51,7 +71,7 @@ export default function HomePage() {
 
           <button
             onClick={() => setOpen(true)}
-            className="mt-8 rounded-full bg-[#3b2b20] px-8 py-3 text-white transition hover:bg-[#5a4633]"
+            className="mt-8 rounded-full bg-[#3b2b20] px-8 py-3 text-white transition duration-300 hover:bg-[#5a4633]"
           >
             Abrir invitación
           </button>
@@ -62,86 +82,87 @@ export default function HomePage() {
 
   return (
     <main className="bg-[#f5efe6] text-[#3b2b20]">
-      {menuOpen && (
-        <div
-          className="fixed inset-0 z-[60] bg-black/35 md:hidden"
-          onClick={closeMenu}
-        />
-      )}
+      <div
+        className={`fixed inset-0 z-[60] bg-black/30 backdrop-blur-[3px] transition-opacity duration-300 md:hidden ${
+          menuOpen
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
+        }`}
+        onClick={closeMenu}
+      />
 
       <aside
-        className={`fixed left-0 top-0 z-[70] h-full w-[85%] max-w-sm bg-[#f5efe6] shadow-2xl transition-transform duration-300 md:hidden ${
+        className={`fixed left-0 top-0 z-[70] flex h-full w-[88%] max-w-sm flex-col bg-[#f5efe6]/98 shadow-2xl ring-1 ring-black/5 backdrop-blur-xl transition-transform duration-300 ease-out md:hidden ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between border-b border-[#d9cbb9] px-5 py-5">
-          <span className="text-lg tracking-[0.2em] text-[#3b2b20]">MENÚ</span>
-          <button
-            type="button"
-            onClick={closeMenu}
-            className="text-3xl leading-none text-[#3b2b20]"
-            aria-label="Cerrar menú"
-          >
-            ✕
-          </button>
+        <div className="border-b border-[#d9cbb9] px-6 py-6">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.32em] text-[#8b6b4f]">
+                Invitación
+              </p>
+              <h2 className={`mt-2 text-3xl ${greatVibes.className}`}>
+                Brigitte &amp; Alexander
+              </h2>
+              <p className="mt-2 text-sm text-[#5a4633]">{boda.fecha}</p>
+            </div>
+
+            <button
+              type="button"
+              onClick={closeMenu}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d9cbb9] bg-white/70 text-[#3b2b20] transition hover:bg-white"
+              aria-label="Cerrar menú"
+            >
+              <X size={22} />
+            </button>
+          </div>
         </div>
 
-        <nav className="flex flex-col px-5 py-4 text-base text-[#3b2b20]">
-          <a
-            href="#bienvenidos"
-            onClick={closeMenu}
-            className="border-b border-[#e4d8cb] py-4"
-          >
-            Bienvenidos
-          </a>
-          <a
-            href="#blog"
-            onClick={closeMenu}
-            className="border-b border-[#e4d8cb] py-4"
-          >
-            Nuestra historia
-          </a>
-          <a
-            href="#invitacion"
-            onClick={closeMenu}
-            className="border-b border-[#e4d8cb] py-4"
-          >
-            Invitación oficial
-          </a>
-          <a
-            href="#rsvp"
-            onClick={closeMenu}
-            className="border-b border-[#e4d8cb] py-4"
-          >
-            Confirmar asistencia
-          </a>
-          <a
-            href="#contacto"
-            onClick={closeMenu}
-            className="border-b border-[#e4d8cb] py-4"
-          >
-            Contacto
-          </a>
-          <a
-            href="#galeria"
-            onClick={closeMenu}
-            className="border-b border-[#e4d8cb] py-4"
-          >
-            Galería
-          </a>
+        <nav className="flex flex-col px-4 py-4">
+          {mobileLinks.map((item) => {
+            const Icon = item.icon;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={closeMenu}
+                className="flex items-center justify-between rounded-2xl px-3 py-4 text-[#3b2b20] transition hover:bg-white/70"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#efe5d8] text-[#6b4f3a]">
+                    <Icon size={18} />
+                  </div>
+                  <span className="text-[15px]">{item.label}</span>
+                </div>
+                <span className="text-xl text-[#8b6b4f]">›</span>
+              </a>
+            );
+          })}
         </nav>
+
+        <div className="mt-auto border-t border-[#d9cbb9] px-6 py-6">
+          <div className="rounded-[1.5rem] bg-white/70 p-4 shadow-sm ring-1 ring-[#e8ddd1]">
+            <p className="text-xs uppercase tracking-[0.25em] text-[#8b6b4f]">
+              Nuestra boda
+            </p>
+            <p className="mt-2 text-sm leading-6 text-[#5a4633]">
+              Gracias por acompañarnos en este día tan especial 💍
+            </p>
+          </div>
+        </div>
       </aside>
 
-      <header className="sticky top-0 z-50 border-b border-[#d9cbb9] bg-[#f5efe6]/95 backdrop-blur">
+      <header className="sticky top-0 z-50 border-b border-[#d9cbb9] bg-[#f5efe6]/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 md:py-5">
           <div className="flex items-center gap-4">
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d9cbb9] md:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d9cbb9] bg-white/70 text-[#3b2b20] transition hover:bg-white md:hidden"
               aria-label="Abrir menú"
             >
-              <span className="text-2xl leading-none">☰</span>
+              <Menu size={22} />
             </button>
 
             <a
@@ -453,7 +474,9 @@ export default function HomePage() {
         </section>
       </FadeIn>
 
-      <MusicToggle />
+      <div className="fixed bottom-5 right-5 z-40">
+        <MusicToggle />
+      </div>
     </main>
   );
 }
