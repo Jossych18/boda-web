@@ -58,6 +58,18 @@ export default function HomePage() {
   const closeMenu = () => setMenuOpen(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const params = new URLSearchParams(window.location.search);
+    const shouldOpen =
+      params.get("open") === "1" || window.location.hash === "#bienvenidos";
+
+    if (shouldOpen) {
+      setOpen(true);
+    }
+  }, []);
+
+  useEffect(() => {
     if (!open) return;
 
     const sections = navLinks
@@ -363,47 +375,84 @@ export default function HomePage() {
       <FadeIn>
         <section id="blog" className="px-4 py-14 sm:px-6 sm:py-16 md:py-20">
           <div className="mx-auto max-w-6xl space-y-10 md:space-y-16">
-            <div className="grid items-center gap-8 rounded-[2rem] bg-white p-6 shadow-xl sm:p-8 md:grid-cols-2 md:gap-10 md:p-10">
-              <div className="overflow-hidden rounded-[1.5rem]">
-                <Image
-                  src="/alianzas-doradas.jpg"
-                  alt="alianzas"
-                  width={900}
-                  height={700}
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                />
+            <div className="rounded-[2rem] bg-white p-6 shadow-xl sm:p-8 md:p-10">
+              <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10">
+                <div className="overflow-hidden rounded-[1.5rem]">
+                  <Image
+                    src="/alianzas-doradas.jpg"
+                    alt="Nuestra historia"
+                    width={900}
+                    height={700}
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                </div>
+
+                <div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f] sm:text-sm">
+                    Nuestra historia
+                  </p>
+
+                  <h2 className="mt-4 text-3xl font-light sm:text-4xl">
+                    Así empezó todo
+                  </h2>
+
+                  <div className="mt-6 space-y-5 text-sm leading-7 text-[#5a4633] sm:mt-8 sm:text-base sm:leading-8">
+                    <p>
+                      Dicen que las grandes historias empiezan sin planearse… y
+                      la nuestra es el mejor ejemplo.
+                    </p>
+
+                    <p>
+                      Yo tenía 18, él 22, y nos conocimos gracias a amigos en
+                      común. Lo que empezó como algo sin importancia… bueno,
+                      claramente se nos fue un poco de las manos 😄
+                    </p>
+
+                    <p>
+                      Porque casi sin darnos cuenta, llegó Mathias. Y en lugar
+                      de salir corriendo, hicimos lo contrario: nos unimos más
+                      que nunca. Crecimos rápido, aprendimos sobre la marcha…
+                      pero siempre juntos.
+                    </p>
+
+                    <p>
+                      Seis años después, como si no hubiéramos tenido suficiente
+                      aventura, decidimos sumar a Thiago al equipo.
+                    </p>
+
+                    <p>
+                      Tres años comprometidos, dos hijos, mil historias… y por
+                      fin este año decimos: “vale, ahora sí, vamos a hacerlo
+                      oficial”.
+                    </p>
+
+                    <p>
+                      No ha sido perfecto, pero ha sido nuestro. Y sinceramente…
+                      no lo cambiaría por nada.
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f] sm:text-sm">
-                  Blog de boda
-                </p>
+              <div className="mt-8 grid gap-6 md:grid-cols-2">
+                <div className="overflow-hidden rounded-[1.5rem] shadow-md">
+                  <Image
+                    src="/hijo1.jpeg"
+                    alt="Foto de Mathias"
+                    width={900}
+                    height={700}
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                </div>
 
-                <h2 className="mt-4 text-3xl font-light sm:text-4xl">
-                  Nuestra historia
-                </h2>
-
-                <div className="mt-6 space-y-5 text-sm leading-7 text-[#5a4633] sm:mt-8 sm:text-base sm:leading-8">
-                  <p>Hola a todos!!!</p>
-
-                  <p>
-                    Este es el blog del que será el día más importante de
-                    nuestras vidas ¡¡¡nuestra boda!!!
-                  </p>
-
-                  <p>
-                    Será un día super especial que queremos compartir con todos
-                    vosotros, pero hasta que llegue aún tenemos mucho trabajo
-                    por delante. Usaremos este blog para manteneros al día de
-                    cualquier novedad y para explicaros cómo llevamos todo lo de
-                    la organización, los nervios, el estrés y muchísima
-                    felicidad.
-                  </p>
-
-                  <p>
-                    Esperamos que disfrutéis tanto como nosotros, un abrazo
-                    muuuy grande!!!
-                  </p>
+                <div className="overflow-hidden rounded-[1.5rem] shadow-md">
+                  <Image
+                    src="/hijo2.jpeg"
+                    alt="Foto de Thiago"
+                    width={900}
+                    height={700}
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
                 </div>
               </div>
             </div>
@@ -433,30 +482,18 @@ export default function HomePage() {
 
                 <div className="mt-6 space-y-5 text-sm leading-7 text-[#5a4633] sm:mt-8 sm:text-base sm:leading-8">
                   <p>
-                    Nos hace muchísima ilusión invitaros a formar parte de uno
-                    de los días más importantes de nuestras vidas. Queremos
-                    celebrar nuestro amor rodeados de las personas que más
-                    queremos, y vosotros sois una parte muy especial de ello.
+                    Gracias de corazón por acompañarnos en un momento tan
+                    importante para nosotros. Nos hace muchísima ilusión poder
+                    celebrar este día rodeados de las personas que más queremos.
                   </p>
 
                   <p>
-                    El día estará lleno de momentos inolvidables, risas y mucho
-                    cariño, y nos encantaría compartirlo con todos vosotros.
+                    Para organizar todo con cariño, os pedimos que confirméis
+                    vuestra asistencia antes del{" "}
+                    <strong>1 de junio de 2026</strong>.
                   </p>
 
-                  <p>
-                    La celebración del banquete tendrá lugar en Complejo La
-                    Cigüeña.
-                  </p>
-
-                  <p>
-                    Para poder organizar cada detalle con todo el cariño que
-                    merece, os pedimos que confirméis vuestra asistencia y
-                    realicéis la aportación correspondiente
-                    <strong> antes del 1 de junio de 2026</strong>.
-                  </p>
-
-                  <p>La aportación es de:</p>
+                  <p>La aportación orientativa es:</p>
 
                   <ul className="list-disc space-y-2 pl-5">
                     <li>
@@ -468,31 +505,18 @@ export default function HomePage() {
                   </ul>
 
                   <p>
-                    Si deseáis consultar la asistencia de acompañantes o
-                    personas adicionales, os pedimos que nos lo comentéis
-                    previamente, ya que necesitamos cerrar el número de
-                    comensales con antelación.
+                    Si necesitáis consultar cualquier cambio o acompañante
+                    adicional, os agradecemos que nos lo comentéis previamente.
                   </p>
 
                   <p>
-                    La reserva quedará confirmada una vez recibamos tanto la
-                    confirmación como la aportación.
+                    IBAN: <strong>ES54 0073 0100 5905 9909 4910</strong>
                   </p>
 
                   <p>
-                    Podéis realizar el ingreso en el siguiente número de cuenta:
+                    Gracias por formar parte de nuestra historia y por compartir
+                    con nosotros este día tan especial.
                   </p>
-
-                  <p className="text-base font-medium tracking-wide text-[#3b2b20] sm:text-lg md:text-xl">
-                    ES54 0073 0100 5905 9909 4910
-                  </p>
-
-                  <p>
-                    Gracias de corazón por formar parte de este momento tan
-                    especial para nosotros.
-                  </p>
-
-                  <p>Con muchísimo cariño,</p>
 
                   <p className="text-base font-medium text-[#3b2b20] sm:text-lg md:text-xl">
                     Brigitte &amp; Alexander 💍

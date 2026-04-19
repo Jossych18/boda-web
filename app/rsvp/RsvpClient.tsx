@@ -40,7 +40,7 @@ export default function RsvpClient() {
 
     if (adultosUrl) {
       const adultosNum = Number(adultosUrl);
-      if (!Number.isNaN(adultosNum) && adultosNum > 0) {
+      if (!Number.isNaN(adultosNum) && adultosNum >= 0) {
         setAdultos(String(adultosNum));
       }
     }
@@ -106,7 +106,7 @@ export default function RsvpClient() {
             </p>
 
             <Link
-              href="/#bienvenidos"
+              href="/?open=1#bienvenidos"
               className="mt-8 inline-block rounded-full bg-[#3b2b20] px-8 py-3 text-xs uppercase tracking-[0.25em] text-[#f5efe6] transition hover:bg-[#5a4633] sm:text-sm"
             >
               Volver a bienvenida
@@ -122,7 +122,7 @@ export default function RsvpClient() {
       <div className="mx-auto max-w-4xl">
         <div className="rounded-[2rem] border border-[#e5d8ca] bg-[#f5efe6] p-6 text-[#3b2b20] shadow-2xl sm:p-8 md:p-10">
           <Link
-            href="/#bienvenidos"
+            href="/?open=1#bienvenidos"
             className="inline-flex items-center text-xs uppercase tracking-[0.25em] text-[#8b6b4f] transition hover:opacity-70 sm:text-sm"
           >
             ← Volver a bienvenida
@@ -146,30 +146,6 @@ export default function RsvpClient() {
               <strong>01.06.2026</strong>.
             </p>
           </div>
-
-          {(nombreInput || adultos || ninos) && (
-            <div className="mt-6 rounded-[1.5rem] border border-[#d8c7b2] bg-[#f8f3ec] p-5 text-sm leading-7 text-[#5a4633]">
-              <p className="text-xs uppercase tracking-[0.25em] text-[#8b6b4f] sm:text-sm">
-                Invitación personalizada
-              </p>
-
-              {nombreInput && (
-                <p className="mt-3">
-                  Invitación preparada para: <strong>{nombreInput}</strong>
-                </p>
-              )}
-
-              <p className="mt-2">
-                Plazas previstas: <strong>{adultosNum}</strong> adulto(s) y{" "}
-                <strong>{ninosNum}</strong> niño(s).
-              </p>
-
-              <p className="mt-2 text-[#8b6b4f]">
-                Si necesitas consultar cualquier cambio o acompañante adicional,
-                por favor coméntalo previamente con nosotros.
-              </p>
-            </div>
-          )}
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-6 sm:mt-10">
             <input
