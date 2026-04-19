@@ -11,7 +11,7 @@ import {
   Images,
   MapPinned,
 } from "lucide-react";
-import { greatVibes } from "./fonts";
+import { greatVibes, apricot } from "./fonts";
 import ContactForm from "./components/ContactForm";
 import FadeIn from "./components/FadeIn";
 import Countdown from "./components/Countdown";
@@ -127,7 +127,7 @@ export default function HomePage() {
                     Para
                   </p>
                   <p
-                    className={`mt-2 text-2xl leading-none text-[#3b2b20] sm:text-3xl ${greatVibes.className}`}
+                    className={`mt-2 text-2xl leading-none text-[#3b2b20] sm:text-3xl ${apricot.className}`}
                   >
                     {invitado}
                   </p>
@@ -177,7 +177,7 @@ export default function HomePage() {
               <p className="text-[11px] uppercase tracking-[0.32em] text-[#8b6b4f]">
                 Invitación
               </p>
-              <h2 className={`mt-2 text-3xl ${greatVibes.className}`}>
+              <h2 className={`mt-2 text-3xl ${apricot.className}`}>
                 Brigitte &amp; Alexander
               </h2>
               <p className="mt-2 text-sm text-[#5a4633]">{boda.fecha}</p>
@@ -334,7 +334,7 @@ export default function HomePage() {
           </p>
 
           <h1
-            className={`mt-4 text-4xl text-white sm:text-5xl md:text-7xl ${greatVibes.className}`}
+            className={`mt-4 text-4xl text-white sm:text-5xl md:text-7xl ${apricot.className}`}
           >
             {boda.nombres}
           </h1>
@@ -613,7 +613,7 @@ export default function HomePage() {
           </p>
 
           <h2
-            className={`mt-4 text-4xl text-[#3b2b20] sm:text-5xl ${greatVibes.className}`}
+            className={`mt-4 text-4xl text-[#3b2b20] sm:text-5xl ${apricot.className}`}
           >
             Brigitte &amp; Alexander
           </h2>
