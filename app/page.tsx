@@ -36,7 +36,12 @@ const navLinks = [
   { href: "#bienvenidos", id: "bienvenidos", label: "Bienvenidos", icon: House },
   { href: "#blog", id: "blog", label: "Historia", icon: Heart },
   { href: "#invitacion", id: "invitacion", label: "Invitación", icon: Mail },
-  { href: "#rsvp", id: "rsvp", label: "RSVP", icon: CircleCheck },
+  {
+    href: "#rsvp",
+    id: "rsvp",
+    label: "Formulario",
+    icon: CircleCheck,
+  },
   { href: "#contacto", id: "contacto", label: "Contacto", icon: Phone },
   { href: "#galeria", id: "galeria", label: "Galería", icon: Images },
 ];
@@ -93,25 +98,34 @@ export default function HomePage() {
         </Suspense>
 
         <div className="flex min-h-screen items-center justify-center bg-[#f5efe6] px-4 py-10 text-center text-[#3b2b20] sm:px-6">
-          <div className="w-full max-w-md rounded-[2rem] border border-[#d9cbb9] bg-white p-8 shadow-2xl sm:p-10">
-            <p className="text-xs uppercase tracking-[0.3em] text-[#8b6b4f]">
+          <div className="relative w-full max-w-md rounded-[2rem] border border-[#d9cbb9] bg-white p-8 shadow-2xl sm:p-10">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[#e7d8c7] bg-[#faf6f1] text-[#8b6b4f] shadow-sm">
+              <Mail size={24} />
+            </div>
+
+            <p className="mt-4 text-xs uppercase tracking-[0.3em] text-[#8b6b4f]">
               Invitación
             </p>
+
+            {invitado ? (
+              <div className="mx-auto mt-5 w-full max-w-xs rounded-[1.25rem] border border-[#e7d8c7] bg-[#faf6f1] px-4 py-3 shadow-sm">
+                <p className="text-[11px] uppercase tracking-[0.25em] text-[#8b6b4f]">
+                  Para
+                </p>
+                <p className="mt-1 text-lg font-medium leading-6 text-[#3b2b20] sm:text-xl">
+                  {invitado}
+                </p>
+              </div>
+            ) : (
+              <p className="mt-5 text-sm leading-7 text-[#5a4633] sm:text-base sm:leading-8">
+                Tenemos el placer de invitarte a compartir con nosotros uno de
+                los días más importantes de nuestras vidas.
+              </p>
+            )}
 
             <h1 className={`mt-6 text-4xl sm:text-5xl ${greatVibes.className}`}>
               {boda.nombres}
             </h1>
-
-            {invitado ? (
-              <p className="mt-5 text-base leading-7 text-[#5a4633] sm:text-lg">
-                Para <strong>{invitado}</strong>
-              </p>
-            ) : (
-              <p className="mt-5 text-sm leading-7 text-[#5a4633] sm:text-base sm:leading-8">
-                Tenemos el placer de invitarte a compartir con nosotros uno de los
-                días más importantes de nuestras vidas.
-              </p>
-            )}
 
             {(adultosInvitados !== null || ninosInvitados !== null) && (
               <div className="mt-5 rounded-[1.5rem] border border-[#e7d8c7] bg-[#faf6f1] p-4 text-sm leading-7 text-[#5a4633]">
@@ -124,7 +138,8 @@ export default function HomePage() {
                   <strong>{adultosInvitados ?? 0}</strong> adulto(s)
                   {ninosInvitados !== null && (
                     <>
-                      {" "}y <strong>{ninosInvitados}</strong> niño(s)
+                      {" "}
+                      y <strong>{ninosInvitados}</strong> niño(s)
                     </>
                   )}
                   .
@@ -527,7 +542,9 @@ export default function HomePage() {
               Confirma tu asistencia
             </p>
 
-            <h2 className="mt-4 text-3xl font-light sm:text-4xl">RSVP</h2>
+            <h2 className="mt-4 text-3xl font-light sm:text-4xl">
+              Formulario de asistencia
+            </h2>
 
             <p className="mt-4 text-base sm:text-xl">
               ¿Nos acompañas o te lo pierdes?
@@ -599,7 +616,9 @@ export default function HomePage() {
             Gracias por acompañarnos
           </p>
 
-          <h2 className={`mt-4 text-4xl text-[#3b2b20] sm:text-5xl ${greatVibes.className}`}>
+          <h2
+            className={`mt-4 text-4xl text-[#3b2b20] sm:text-5xl ${greatVibes.className}`}
+          >
             Brigitte &amp; Alexander
           </h2>
 

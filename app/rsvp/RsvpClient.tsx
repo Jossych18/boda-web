@@ -11,14 +11,23 @@ export default function RsvpClient() {
   const [nombre, setNombre] = useState("");
   const [nombreInput, setNombreInput] = useState("");
   const [asistencia, setAsistencia] = useState("Sí, asistiré");
-  const [adultos, setAdultos] = useState(1);
-  const [ninos, setNinos] = useState(0);
+
+  const [adultos, setAdultos] = useState("1");
+  const [ninos, setNinos] = useState("0");
 
   const PRECIO_ADULTO = 130;
   const PRECIO_NINO = 55;
 
   const asistira = asistencia === "Sí, asistiré";
-  const total = asistira ? adultos * PRECIO_ADULTO + ninos * PRECIO_NINO : 0;
+
+  const adultosNum =
+    adultos.trim() === "" ? 0 : Math.max(0, Number(adultos) || 0);
+  const ninosNum =
+    ninos.trim() === "" ? 0 : Math.max(0, Number(ninos) || 0);
+
+  const total = asistira
+    ? adultosNum * PRECIO_ADULTO + ninosNum * PRECIO_NINO
+    : 0;
 
   useEffect(() => {
     const nombreUrl = searchParams.get("r");
@@ -32,14 +41,14 @@ export default function RsvpClient() {
     if (adultosUrl) {
       const adultosNum = Number(adultosUrl);
       if (!Number.isNaN(adultosNum) && adultosNum > 0) {
-        setAdultos(adultosNum);
+        setAdultos(String(adultosNum));
       }
     }
 
     if (ninosUrl) {
       const ninosNum = Number(ninosUrl);
       if (!Number.isNaN(ninosNum) && ninosNum >= 0) {
-        setNinos(ninosNum);
+        setNinos(String(ninosNum));
       }
     }
   }, [searchParams]);
@@ -49,6 +58,10 @@ export default function RsvpClient() {
 
     const form = e.currentTarget;
     const data = new FormData(form);
+
+    data.set("adultos", String(adultosNum));
+    data.set("ninos", String(ninosNum));
+    data.set("total_aportacion", String(total));
 
     const res = await fetch("https://formspree.io/f/mgopgjpk", {
       method: "POST",
@@ -63,8 +76,8 @@ export default function RsvpClient() {
       setEnviado(true);
       form.reset();
       setAsistencia("Sí, asistiré");
-      setAdultos(1);
-      setNinos(0);
+      setAdultos("1");
+      setNinos("0");
       setNombreInput("");
     }
   }
@@ -88,15 +101,15 @@ export default function RsvpClient() {
 
             <p className="mt-3 text-sm leading-7 text-[#8b6b4f] sm:text-base">
               {asistira
-                ? "Recuerda realizar la aportación correspondiente antes del 1 de junio de 2026 para confirmar la reserva."
+                ? "Tu asistencia ha quedado registrada correctamente."
                 : "Gracias por avisarnos con antelación."}
             </p>
 
             <Link
-              href="/"
+              href="/#bienvenidos"
               className="mt-8 inline-block rounded-full bg-[#3b2b20] px-8 py-3 text-xs uppercase tracking-[0.25em] text-[#f5efe6] transition hover:bg-[#5a4633] sm:text-sm"
             >
-              Volver a la invitación
+              Volver a bienvenida
             </Link>
           </div>
         </div>
@@ -109,10 +122,10 @@ export default function RsvpClient() {
       <div className="mx-auto max-w-4xl">
         <div className="rounded-[2rem] border border-[#e5d8ca] bg-[#f5efe6] p-6 text-[#3b2b20] shadow-2xl sm:p-8 md:p-10">
           <Link
-            href="/"
+            href="/#bienvenidos"
             className="inline-flex items-center text-xs uppercase tracking-[0.25em] text-[#8b6b4f] transition hover:opacity-70 sm:text-sm"
           >
-            ← Volver a la invitación
+            ← Volver a bienvenida
           </Link>
 
           <div className="mt-6 max-w-2xl">
@@ -121,7 +134,7 @@ export default function RsvpClient() {
             </p>
 
             <h1 className="mt-4 text-3xl font-light sm:text-4xl md:text-5xl">
-              RSVP
+              Formulario de asistencia
             </h1>
 
             <p className="mt-4 text-base leading-7 text-[#5a4633] sm:text-lg">
@@ -134,7 +147,7 @@ export default function RsvpClient() {
             </p>
           </div>
 
-          {(nombreInput || adultos || ninos >= 0) && (
+          {(nombreInput || adultos || ninos) && (
             <div className="mt-6 rounded-[1.5rem] border border-[#d8c7b2] bg-[#f8f3ec] p-5 text-sm leading-7 text-[#5a4633]">
               <p className="text-xs uppercase tracking-[0.25em] text-[#8b6b4f] sm:text-sm">
                 Invitación personalizada
@@ -147,8 +160,8 @@ export default function RsvpClient() {
               )}
 
               <p className="mt-2">
-                Plazas previstas: <strong>{adultos}</strong> adulto(s) y{" "}
-                <strong>{ninos}</strong> niño(s).
+                Plazas previstas: <strong>{adultosNum}</strong> adulto(s) y{" "}
+                <strong>{ninosNum}</strong> niño(s).
               </p>
 
               <p className="mt-2 text-[#8b6b4f]">
@@ -208,11 +221,10 @@ export default function RsvpClient() {
                     <input
                       type="number"
                       name="adultos"
-                      min="1"
+                      min="0"
+                      inputMode="numeric"
                       value={adultos}
-                      onChange={(e) =>
-                        setAdultos(Math.max(1, Number(e.target.value) || 1))
-                      }
+                      onChange={(e) => setAdultos(e.target.value)}
                       className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
                     />
                   </div>
@@ -225,10 +237,9 @@ export default function RsvpClient() {
                       type="number"
                       name="ninos"
                       min="0"
+                      inputMode="numeric"
                       value={ninos}
-                      onChange={(e) =>
-                        setNinos(Math.max(0, Number(e.target.value) || 0))
-                      }
+                      onChange={(e) => setNinos(e.target.value)}
                       className="w-full rounded-2xl border border-[#d8c7b2] bg-[#fcfaf7] px-4 py-3.5 text-[#3b2b20] outline-none transition focus:border-[#8b6b4f]"
                     />
                   </div>
@@ -241,10 +252,10 @@ export default function RsvpClient() {
 
                   <div className="mt-4 grid gap-3 text-sm text-[#5a4633] sm:text-base">
                     <p>
-                      Adultos: {adultos} × {PRECIO_ADULTO} €
+                      Adultos: {adultosNum} × {PRECIO_ADULTO} €
                     </p>
                     <p>
-                      Menores de 12 años: {ninos} × {PRECIO_NINO} €
+                      Menores de 12 años: {ninosNum} × {PRECIO_NINO} €
                     </p>
                     <p className="pt-2 text-lg font-medium text-[#3b2b20] sm:text-xl">
                       Total: {total} €
@@ -287,12 +298,6 @@ export default function RsvpClient() {
               >
                 Enviar respuesta
               </button>
-
-              <p className="text-sm text-[#8b6b4f]">
-                {asistira
-                  ? "Recuerda: la asistencia queda confirmada con el pago."
-                  : "Tu respuesta se enviará al momento."}
-              </p>
             </div>
           </form>
         </div>

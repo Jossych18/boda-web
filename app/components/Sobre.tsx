@@ -1,13 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 export default function Sobre({
   setInvitado,
   setAdultosInvitados,
   setNinosInvitados,
-}: any) {
+}: {
+  setInvitado: (value: string) => void;
+  setAdultosInvitados: (value: number | null) => void;
+  setNinosInvitados: (value: number | null) => void;
+}) {
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -15,18 +19,25 @@ export default function Sobre({
     const adultosUrl = searchParams.get("ad");
     const ninosUrl = searchParams.get("ni");
 
-    if (nombreUrl) setInvitado(nombreUrl);
+    // Nombre invitado
+    setInvitado(nombreUrl || "");
 
+    // Adultos
     if (adultosUrl) {
-      const n = Number(adultosUrl);
-      if (!Number.isNaN(n)) setAdultosInvitados(n);
+      const adultosNum = Number(adultosUrl);
+      setAdultosInvitados(!Number.isNaN(adultosNum) ? adultosNum : null);
+    } else {
+      setAdultosInvitados(null);
     }
 
+    // Niños
     if (ninosUrl) {
-      const n = Number(ninosUrl);
-      if (!Number.isNaN(n)) setNinosInvitados(n);
+      const ninosNum = Number(ninosUrl);
+      setNinosInvitados(!Number.isNaN(ninosNum) ? ninosNum : null);
+    } else {
+      setNinosInvitados(null);
     }
-  }, [searchParams]);
+  }, [searchParams, setInvitado, setAdultosInvitados, setNinosInvitados]);
 
   return null;
 }
