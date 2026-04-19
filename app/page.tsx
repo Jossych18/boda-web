@@ -97,63 +97,35 @@ export default function HomePage() {
           />
         </Suspense>
 
-        <div className="flex min-h-screen items-center justify-center bg-[#f5efe6] px-4 py-10 text-center text-[#3b2b20] sm:px-6">
-          <div className="relative w-full max-w-md rounded-[2rem] border border-[#d9cbb9] bg-white p-8 shadow-2xl sm:p-10">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[#e7d8c7] bg-[#faf6f1] text-[#8b6b4f] shadow-sm">
-              <Mail size={24} />
+        <div className="flex min-h-screen items-center justify-center bg-[#f5efe6] px-4 py-10">
+          <div className="w-full max-w-md rounded-[2rem] border border-[#d9cbb9] bg-white p-6 text-center shadow-2xl sm:p-8">
+            <div className="relative mx-auto w-full max-w-[300px]">
+              <Image
+                src="/sobre.png"
+                alt="Sobre de invitación"
+                width={300}
+                height={220}
+                className="mx-auto h-auto w-full object-contain"
+                priority
+              />
+
+              {invitado && (
+                <div className="pointer-events-none absolute left-1/2 top-[18px] w-[78%] -translate-x-1/2 text-center">
+                  <p className="text-[10px] uppercase tracking-[0.28em] text-[#8b6b4f]">
+                    Para
+                  </p>
+                  <p
+                    className={`mt-2 text-2xl leading-none text-[#3b2b20] sm:text-3xl ${greatVibes.className}`}
+                  >
+                    {invitado}
+                  </p>
+                </div>
+              )}
             </div>
-
-            <p className="mt-4 text-xs uppercase tracking-[0.3em] text-[#8b6b4f]">
-              Invitación
-            </p>
-
-            {invitado ? (
-              <div className="mx-auto mt-5 w-full max-w-xs rounded-[1.25rem] border border-[#e7d8c7] bg-[#faf6f1] px-4 py-3 shadow-sm">
-                <p className="text-[11px] uppercase tracking-[0.25em] text-[#8b6b4f]">
-                  Para
-                </p>
-                <p className="mt-1 text-lg font-medium leading-6 text-[#3b2b20] sm:text-xl">
-                  {invitado}
-                </p>
-              </div>
-            ) : (
-              <p className="mt-5 text-sm leading-7 text-[#5a4633] sm:text-base sm:leading-8">
-                Tenemos el placer de invitarte a compartir con nosotros uno de
-                los días más importantes de nuestras vidas.
-              </p>
-            )}
-
-            <h1 className={`mt-6 text-4xl sm:text-5xl ${greatVibes.className}`}>
-              {boda.nombres}
-            </h1>
-
-            {(adultosInvitados !== null || ninosInvitados !== null) && (
-              <div className="mt-5 rounded-[1.5rem] border border-[#e7d8c7] bg-[#faf6f1] p-4 text-sm leading-7 text-[#5a4633]">
-                <p className="text-xs uppercase tracking-[0.25em] text-[#8b6b4f]">
-                  Sobre personalizado
-                </p>
-
-                <p className="mt-3">
-                  Invitación prevista para{" "}
-                  <strong>{adultosInvitados ?? 0}</strong> adulto(s)
-                  {ninosInvitados !== null && (
-                    <>
-                      {" "}
-                      y <strong>{ninosInvitados}</strong> niño(s)
-                    </>
-                  )}
-                  .
-                </p>
-              </div>
-            )}
-
-            <p className="mt-6 text-sm uppercase tracking-[0.2em] text-[#8b6b4f]">
-              {boda.fecha}
-            </p>
 
             <button
               onClick={() => setOpen(true)}
-              className="mt-8 rounded-full bg-[#3b2b20] px-8 py-3 text-white transition duration-300 hover:bg-[#5a4633]"
+              className="mt-4 rounded-full bg-[#3b2b20] px-8 py-3 text-white transition duration-300 hover:bg-[#5a4633]"
             >
               Abrir sobre
             </button>
