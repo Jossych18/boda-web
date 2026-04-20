@@ -510,12 +510,14 @@ export default function HomePage() {
             </h2>
 
             <div className="mt-8 grid gap-6 md:grid-cols-2">
-              <div className="rounded-[1.5rem] border border-[#d8c7b2] bg-[#faf6f1] p-6">
-                <h3 className="text-xl font-medium text-[#3b2b20]">Mujer</h3>
-                <p className="mt-4 text-sm leading-7 text-[#5a4633] sm:text-base">
-                  Estilo formal o semiformal largo. Recomendamos un look elegante
-                  y cómodo para disfrutar de toda la celebración.
-                </p>
+              <div className="rounded-[1.5rem] border border-[#d8c7b2] bg-[#faf6f1] p-6 grid min-h-[540px] grid-rows-[auto_auto_1fr_auto]">
+                <div>
+                  <h3 className="text-xl font-medium text-[#3b2b20]">Mujer</h3>
+                  <p className="mt-4 text-sm leading-7 text-[#5a4633] sm:text-base">
+                    Estilo formal o semiformal largo. Recomendamos un look elegante y cómodo
+                    para disfrutar de toda la celebración.
+                  </p>
+                </div>
 
                 <div className="mt-6 grid grid-cols-2 items-end gap-4">
                   <ul className="space-y-2 text-sm leading-7 text-[#5a4633] sm:text-base">
@@ -529,9 +531,11 @@ export default function HomePage() {
                     alt="Vestimenta mujer"
                     width={500}
                     height={500}
-                    className="mx-auto h-auto w-full max-w-[140px] object-contain opacity-90 transition duration-500 hover:scale-105"
+                    className="mx-auto h-auto w-full max-w-[140px] object-contain opacity-90 self-end"
                   />
                 </div>
+
+                <div />
 
                 <div className="mt-5 flex flex-wrap gap-3">
                   <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#d8c5b2]" />
@@ -541,12 +545,14 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="rounded-[1.5rem] border border-[#d8c7b2] bg-[#faf6f1] p-6">
-                <h3 className="text-xl font-medium text-[#3b2b20]">Hombre</h3>
-                <p className="mt-4 text-sm leading-7 text-[#5a4633] sm:text-base">
-                  Estilo formal o semiformal. Un conjunto clásico y elegante será
-                  perfecto para la ocasión.
-                </p>
+              <div className="rounded-[1.5rem] border border-[#d8c7b2] bg-[#faf6f1] p-6 grid min-h-[540px] grid-rows-[auto_auto_1fr_auto]">
+                <div>
+                  <h3 className="text-xl font-medium text-[#3b2b20]">Hombre</h3>
+                  <p className="mt-4 text-sm leading-7 text-[#5a4633] sm:text-base">
+                    Estilo formal o semiformal. Un conjunto clásico y elegante será perfecto
+                    para la ocasión.
+                  </p>
+                </div>
 
                 <div className="mt-6 grid grid-cols-2 items-end gap-4">
                   <ul className="space-y-2 text-sm leading-7 text-[#5a4633] sm:text-base">
@@ -560,12 +566,14 @@ export default function HomePage() {
                     alt="Vestimenta hombre"
                     width={500}
                     height={500}
-                    className="mx-auto h-auto w-full max-w-[110px] object-contain opacity-90 transition duration-500 hover:scale-105"
+                    className="mx-auto h-auto w-full max-w-[110px] object-contain opacity-90 self-end"
                   />
                 </div>
 
+                <div />
+
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#1f2a44]" />
+                  <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#1e3a6d]" />
                   <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#6f7c8b]" />
                   <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#8c7a67]" />
                   <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#d4d0c8]" />
