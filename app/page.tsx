@@ -519,7 +519,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="mt-6 grid grid-cols-2 items-end gap-4">
+                <div className="mt-16 grid grid-cols-2 items-end gap-4">
                   <ul className="space-y-2 text-sm leading-7 text-[#5a4633] sm:text-base">
                     <li>• Vestido largo o midi elegante</li>
                     <li>• Tacones o calzado formal</li>
