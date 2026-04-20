@@ -109,8 +109,17 @@ export default function HomePage() {
         <div className="flex min-h-screen items-center justify-center bg-[#f5efe6] px-4 py-10">
           <div className="w-full max-w-md rounded-[2rem] border border-[#d9cbb9] bg-white p-6 text-center shadow-2xl sm:p-8">
             <div className="relative mx-auto w-full max-w-[300px]">
+              <Image
+                src="/sobre.png"
+                alt="Sobre de invitación"
+                width={300}
+                height={220}
+                className="mx-auto h-auto w-full object-contain"
+                priority
+              />
+
               {invitado && (
-                <div className="mb-4 text-center">
+                <div className="pointer-events-none absolute left-1/2 top-[18px] w-[78%] -translate-x-1/2 text-center">
                   <p className="text-[10px] uppercase tracking-[0.28em] text-[#8b6b4f]">
                     Para
                   </p>
@@ -121,15 +130,6 @@ export default function HomePage() {
                   </p>
                 </div>
               )}
-
-              <Image
-                src="/sobre.png"
-                alt="Sobre de invitación"
-                width={300}
-                height={220}
-                className="mx-auto h-auto w-full object-contain"
-                priority
-              />
             </div>
 
             <button
@@ -155,18 +155,16 @@ export default function HomePage() {
       </Suspense>
 
       <div
-        className={`fixed inset-0 z-[60] bg-black/30 backdrop-blur-[3px] transition-opacity duration-300 md:hidden ${
-          menuOpen
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
-        }`}
+        className={`fixed inset-0 z-[60] bg-black/30 backdrop-blur-[3px] transition-opacity duration-300 md:hidden ${menuOpen
+          ? "pointer-events-auto opacity-100"
+          : "pointer-events-none opacity-0"
+          }`}
         onClick={closeMenu}
       />
 
       <aside
-        className={`fixed left-0 top-0 z-[70] flex h-full w-[88%] max-w-sm flex-col bg-[#f5efe6]/98 shadow-2xl ring-1 ring-black/5 backdrop-blur-xl transition-transform duration-300 ease-out md:hidden ${
-          menuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed left-0 top-0 z-[70] flex h-full w-[88%] max-w-sm flex-col bg-[#f5efe6]/98 shadow-2xl ring-1 ring-black/5 backdrop-blur-xl transition-transform duration-300 ease-out md:hidden ${menuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="border-b border-[#d9cbb9] px-6 py-6">
           <div className="flex items-start justify-between gap-4">
@@ -201,34 +199,30 @@ export default function HomePage() {
                 key={item.href}
                 href={item.href}
                 onClick={closeMenu}
-                className={`flex items-center justify-between rounded-2xl px-3 py-4 transition ${
-                  isActive ? "bg-white shadow-sm" : "hover:bg-white/70"
-                }`}
+                className={`flex items-center justify-between rounded-2xl px-3 py-4 transition ${isActive ? "bg-white shadow-sm" : "hover:bg-white/70"
+                  }`}
               >
                 <div className="flex items-center gap-3">
                   <div
-                    className={`flex h-10 w-10 items-center justify-center rounded-full ${
-                      isActive
-                        ? "bg-[#3b2b20] text-white"
-                        : "bg-[#efe5d8] text-[#6b4f3a]"
-                    }`}
+                    className={`flex h-10 w-10 items-center justify-center rounded-full ${isActive
+                      ? "bg-[#3b2b20] text-white"
+                      : "bg-[#efe5d8] text-[#6b4f3a]"
+                      }`}
                   >
                     <Icon size={18} />
                   </div>
 
                   <span
-                    className={`text-[15px] ${
-                      isActive ? "font-medium text-[#3b2b20]" : "text-[#3b2b20]"
-                    }`}
+                    className={`text-[15px] ${isActive ? "font-medium text-[#3b2b20]" : "text-[#3b2b20]"
+                      }`}
                   >
                     {item.label}
                   </span>
                 </div>
 
                 <span
-                  className={`text-xl ${
-                    isActive ? "text-[#3b2b20]" : "text-[#8b6b4f]"
-                  }`}
+                  className={`text-xl ${isActive ? "text-[#3b2b20]" : "text-[#8b6b4f]"
+                    }`}
                 >
                   ›
                 </span>
@@ -260,19 +254,16 @@ export default function HomePage() {
             >
               <div className="relative h-5 w-5">
                 <span
-                  className={`absolute left-0 top-[4px] h-[2px] w-5 origin-center rounded-full bg-[#3b2b20] transition duration-300 ${
-                    menuOpen ? "translate-y-[5px] rotate-45" : ""
-                  }`}
+                  className={`absolute left-0 top-[4px] h-[2px] w-5 origin-center rounded-full bg-[#3b2b20] transition duration-300 ${menuOpen ? "translate-y-[5px] rotate-45" : ""
+                    }`}
                 />
                 <span
-                  className={`absolute left-0 top-[9px] h-[2px] w-5 rounded-full bg-[#3b2b20] transition duration-300 ${
-                    menuOpen ? "opacity-0" : "opacity-100"
-                  }`}
+                  className={`absolute left-0 top-[9px] h-[2px] w-5 rounded-full bg-[#3b2b20] transition duration-300 ${menuOpen ? "opacity-0" : "opacity-100"
+                    }`}
                 />
                 <span
-                  className={`absolute left-0 top-[14px] h-[2px] w-5 origin-center rounded-full bg-[#3b2b20] transition duration-300 ${
-                    menuOpen ? "-translate-y-[5px] -rotate-45" : ""
-                  }`}
+                  className={`absolute left-0 top-[14px] h-[2px] w-5 origin-center rounded-full bg-[#3b2b20] transition duration-300 ${menuOpen ? "-translate-y-[5px] -rotate-45" : ""
+                    }`}
                 />
               </div>
             </button>
@@ -293,15 +284,13 @@ export default function HomePage() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className={`relative pb-1 text-sm uppercase tracking-[0.22em] transition ${
-                    isActive ? "text-[#3b2b20]" : "hover:text-[#8b6b4f]"
-                  }`}
+                  className={`relative pb-1 text-sm uppercase tracking-[0.22em] transition ${isActive ? "text-[#3b2b20]" : "hover:text-[#8b6b4f]"
+                    }`}
                 >
                   {item.label}
                   <span
-                    className={`absolute bottom-0 left-0 h-[2px] rounded-full bg-[#3b2b20] transition-all duration-300 ${
-                      isActive ? "w-full opacity-100" : "w-0 opacity-0"
-                    }`}
+                    className={`absolute bottom-0 left-0 h-[2px] rounded-full bg-[#3b2b20] transition-all duration-300 ${isActive ? "w-full opacity-100" : "w-0 opacity-0"
+                      }`}
                   />
                 </a>
               );
@@ -528,11 +517,21 @@ export default function HomePage() {
                   y cómodo para disfrutar de toda la celebración.
                 </p>
 
-                <ul className="mt-4 space-y-2 text-sm leading-7 text-[#5a4633] sm:text-base">
-                  <li>• Vestido largo o midi elegante</li>
-                  <li>• Tacones o calzado formal</li>
-                  <li>• Accesorios discretos o brillantes</li>
-                </ul>
+                <div className="mt-6 grid grid-cols-2 items-center gap-4">
+                  <ul className="space-y-2 text-sm leading-7 text-[#5a4633] sm:text-base">
+                    <li>• Vestido largo o midi elegante</li>
+                    <li>• Tacones o calzado formal</li>
+                    <li>• Accesorios discretos o brillantes</li>
+                  </ul>
+
+                  <Image
+                    src="/mujer-vestimenta.png"
+                    alt="Vestimenta mujer"
+                    width={500}
+                    height={500}
+                    className="mx-auto h-auto w-full max-w-[140px] object-contain opacity-90 self-center"
+                  />
+                </div>
 
                 <div className="mt-5 flex flex-wrap gap-3">
                   <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#d8c5b2]" />
@@ -549,11 +548,21 @@ export default function HomePage() {
                   perfecto para la ocasión.
                 </p>
 
-                <ul className="mt-4 space-y-2 text-sm leading-7 text-[#5a4633] sm:text-base">
-                  <li>• Traje o conjunto semiformal</li>
-                  <li>• Camisa clara</li>
-                  <li>• Zapato formal</li>
-                </ul>
+                <div className="mt-6 grid grid-cols-2 items-center gap-4">
+                  <ul className="space-y-2 text-sm leading-7 text-[#5a4633] sm:text-base">
+                    <li>• Traje o conjunto semiformal</li>
+                    <li>• Camisa clara</li>
+                    <li>• Zapato formal</li>
+                  </ul>
+
+                  <Image
+                    src="/hombre-vestimenta.png"
+                    alt="Vestimenta hombre"
+                    width={500}
+                    height={500}
+                    className="mx-auto h-auto w-full max-w-[140px] object-contain opacity-90 self-center"
+                  />
+                </div>
 
                 <div className="mt-5 flex flex-wrap gap-3">
                   <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#1f2a44]" />
