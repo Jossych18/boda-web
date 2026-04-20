@@ -517,7 +517,7 @@ export default function HomePage() {
                   y cómodo para disfrutar de toda la celebración.
                 </p>
 
-                <div className="mt-6 grid grid-cols-2 items-center gap-4">
+                <div className="mt-6 grid grid-cols-2 items-end gap-4">
                   <ul className="space-y-2 text-sm leading-7 text-[#5a4633] sm:text-base">
                     <li>• Vestido largo o midi elegante</li>
                     <li>• Tacones o calzado formal</li>
@@ -529,7 +529,7 @@ export default function HomePage() {
                     alt="Vestimenta mujer"
                     width={500}
                     height={500}
-                    className="mx-auto h-auto w-full max-w-[140px] object-contain opacity-90 self-center"
+                    className="mx-auto h-auto w-full max-w-[140px] object-contain opacity-90 transition duration-500 hover:scale-105"
                   />
                 </div>
 
@@ -548,7 +548,7 @@ export default function HomePage() {
                   perfecto para la ocasión.
                 </p>
 
-                <div className="mt-6 grid grid-cols-2 items-center gap-4">
+                <div className="mt-6 grid grid-cols-2 items-end gap-4">
                   <ul className="space-y-2 text-sm leading-7 text-[#5a4633] sm:text-base">
                     <li>• Traje o conjunto semiformal</li>
                     <li>• Camisa clara</li>
@@ -560,7 +560,7 @@ export default function HomePage() {
                     alt="Vestimenta hombre"
                     width={500}
                     height={500}
-                    className="mx-auto h-auto w-full max-w-[140px] object-contain opacity-90 self-center"
+                    className="mx-auto h-auto w-full max-w-[110px] object-contain opacity-90 transition duration-500 hover:scale-105"
                   />
                 </div>
 
