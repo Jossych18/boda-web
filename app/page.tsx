@@ -12,7 +12,7 @@ import {
   MapPinned,
   Shirt,
 } from "lucide-react";
-import { apricot } from "./fonts";
+import { apricot, cormorant } from "./fonts";
 import ContactForm from "./components/ContactForm";
 import FadeIn from "./components/FadeIn";
 import Countdown from "./components/Countdown";
@@ -23,7 +23,7 @@ const boda = {
   nombres: "Brigitte & Alexander",
   mensaje: "¡NOS CASAMOS!",
   fecha: "19 de Junio de 2026",
-  hora: "18:00",
+  hora: "17:30",
   lugar: "Complejo La Cigüeña",
   ciudad: "Madrid, España",
   mapsUrl:
@@ -320,7 +320,7 @@ export default function HomePage() {
           </p>
 
           <h1
-            className={`mt-4 text-4xl text-white sm:text-5xl md:text-7xl ${apricot.className}`}
+            className={`mt-4 text-5xl text-white sm:text-6xl md:text-7xl font-light tracking-wide ${cormorant.className}`}
           >
             {boda.nombres}
           </h1>
@@ -539,7 +539,7 @@ export default function HomePage() {
 
                 <div className="mt-5 flex flex-wrap gap-3">
                   <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#d8c5b2]" />
-                  <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#c9d4c2]" />
+                  <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#2f4f3a]" />
                   <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#b8c7d9]" />
                   <span className="h-8 w-8 rounded-full border border-[#d8c7b2] bg-[#e8d6d0]" />
                 </div>
